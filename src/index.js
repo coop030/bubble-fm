@@ -85,11 +85,15 @@ function playlistLink(p) {
 
 async function pickTracks(state) {
   if (process.env.SAMPLE === 'true') return sampleTracks();
-  const token = await spotify.getToken(env('SPOTIFY_CLIENT_ID'), env('SPOTIFY_CLIENT_SECRET'));
+  const hasKeys = process.env.SPOTIFY_CLIENT_ID && process.env.SPOTIFY_CLIENT_SECRET;
+  const token = hasKeys ? await spotify.getToken(env('SPOTIFY_CLIENT_ID'), env('SPOTIFY_CLIENT_SECRET')) : null;
+  if (!hasKeys) console.log('No Spotify keys set, reading the public playlist pages instead.');
   const { ids, keys } = postedBefore(state);
   const picked = [];
   for (const p of PLAYLISTS) {
-    const all = await spotify.getPlaylistTracks(token, playlistLink(p));
+    const all = token
+      ? await spotify.getPlaylistTracks(token, playlistLink(p))
+      : await spotify.getPublicPlaylistTracks(playlistLink(p));
     const skipped = [];
     const next = all.find((t) => {
       const key = songKey(t.artist, t.title);
