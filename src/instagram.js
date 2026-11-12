@@ -23,7 +23,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Instagram processes each uploaded image before it can be published.
 async function waitUntilReady(id, token) {
-  for (let i = 0; i < 30; i++) {
+  // Videos can take a few minutes to process; give up after about ten.
+  for (let i = 0; i < 120; i++) {
     const { status_code: status } = await call('GET', id, { fields: 'status_code', access_token: token });
     if (status === 'FINISHED') return;
     if (status === 'ERROR' || status === 'EXPIRED') throw new Error(`Instagram could not process ${id} (${status})`);
@@ -32,11 +33,15 @@ async function waitUntilReady(id, token) {
   throw new Error(`Instagram took too long to process ${id}`);
 }
 
-async function publishCarousel({ userId, token, imageUrls, caption }) {
+// items: [{ url, video }] — images must be JPEG, videos MP4.
+async function publishCarousel({ userId, token, items, caption }) {
   const children = [];
-  for (const imageUrl of imageUrls) {
+  for (const item of items) {
+    const params = item.video
+      ? { media_type: 'VIDEO', video_url: item.url }
+      : { image_url: item.url };
     const { id } = await call('POST', `${userId}/media`, {
-      image_url: imageUrl,
+      ...params,
       is_carousel_item: 'true',
       access_token: token,
     });

@@ -1,6 +1,8 @@
 # Bubble FM daily post
 
-Every morning this repo picks the next song from each of the three Spotify playlists (Breakfast, Boogie, Date Night), builds the Bubble FM carousel (cover + three track slides with the album art in a bubble, 1080 × 1440), writes the caption and posts it to Instagram.
+Every morning this repo picks the next song from each of the three Spotify playlists (Breakfast, Boogie, Date Night), builds the Bubble FM carousel (cover + three track slides with the album art in a bubble), writes the caption and posts it to Instagram.
+
+Each slide is a 6-second seamless loop at 1080 × 1350 (4:5): the bubbles float, sway and breathe, tiny bubbles rise through the frame, sparkles twinkle and the background colour shifts very slightly. A still JPEG of every slide is saved too. Instagram's API only accepts 4:5 or wider, which is why the slides aren't 3:4; in the grid Instagram trims a sliver off the sides, and nothing important sits there.
 
 It runs on GitHub Actions, so nothing needs to stay switched on at home.
 
@@ -13,12 +15,12 @@ For each playlist it takes the first song (in playlist order) that hasn't been p
 | Mode | What happens |
 |---|---|
 | `preview` | Makes the images. Nothing is posted or remembered. Good for testing. |
-| `manual` | Makes the images and remembers the songs as used. You download the images from the run and post them yourself. |
+| `manual` | Makes the videos and images and remembers the songs as used. You download them from the run and post them yourself. |
 | `post` | Makes the images and posts the carousel to Instagram automatically. |
 
 The daily schedule uses whatever the repository variable `SCHEDULED_MODE` says (`preview` if it isn't set). You can also start a run by hand: **Actions → Daily post → Run workflow**, pick a mode, and tick "Use sample tracks" to try it without Spotify.
 
-The images of every run can be downloaded from the run page under **Artifacts → bubble-fm-post**.
+The videos and images of every run can be downloaded from the run page under **Artifacts → bubble-fm-post**.
 
 ## Setup
 
@@ -50,7 +52,8 @@ Edit the `cron` line in `.github/workflows/daily-post.yml`. It's in UTC: `37 7 *
 
 ## Limits worth knowing
 - Posts made through the API can't have music attached. Add the songs in Stories by hand.
-- Instagram only accepts JPEG images for posts, which is what this makes.
+- Videos take Instagram a few minutes to process, so a `post` run takes a little longer.
+- To post still images instead of videos, set the repository variable `ANIMATE` to `false`.
 - If Spotify changes what apps may read, the playlist step can break. The error message in the run will say what went wrong.
 
 ## Try it locally
@@ -58,7 +61,7 @@ Edit the `cron` line in `.github/workflows/daily-post.yml`. It's in UTC: `37 7 *
 npm ci
 SAMPLE=true node src/index.js prepare
 ```
-The images land in `posts/<date>/`.
+The videos (`.mp4`) and stills (`.jpg`) land in `posts/<date>/`. Rendering takes about a minute.
 
 ## Fonts
 `fonts/` contains Bagel Fat One and Fredoka, both under the SIL Open Font License, which allows bundling them here.

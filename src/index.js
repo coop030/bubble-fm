@@ -69,9 +69,15 @@ async function prepare() {
   }
   const day = state.day + 1;
   const tracks = await pickTracks(state);
-  const slides = await renderPost(day, tracks);
+  const animate = process.env.ANIMATE !== 'false';
+  const slides = await renderPost(day, tracks, { animate });
   fs.mkdirSync(dir, { recursive: true });
-  slides.forEach((buf, i) => fs.writeFileSync(path.join(dir, `${i + 1}.jpg`), buf));
+  const files = [];
+  slides.forEach(({ still, video }, i) => {
+    fs.writeFileSync(path.join(dir, `${i + 1}.jpg`), still);
+    if (video) fs.writeFileSync(path.join(dir, `${i + 1}.mp4`), video);
+    files.push(video ? `${i + 1}.mp4` : `${i + 1}.jpg`);
+  });
   const caption = buildCaption(day, tracks);
   fs.writeFileSync(path.join(dir, 'caption.txt'), caption + '\n');
   const meta = {
@@ -79,7 +85,7 @@ async function prepare() {
     day,
     published: false,
     tracks: tracks.map(({ coverDataUri, ...t }) => t),
-    files: slides.map((_, i) => `${i + 1}.jpg`),
+    files,
   };
   fs.writeFileSync(path.join(dir, 'post.json'), JSON.stringify(meta, null, 2) + '\n');
   console.log(`Prepared day ${day} in posts/${date}:\n\n${caption}`);
@@ -99,14 +105,15 @@ async function publish() {
   if (process.env.MODE !== 'manual') {
     const repo = env('GITHUB_REPOSITORY');
     const sha = env('PUBLISH_SHA');
-    const imageUrls = meta.files.map(
-      (f) => `https://raw.githubusercontent.com/${repo}/${sha}/posts/${date}/${f}`
-    );
+    const items = meta.files.map((f) => ({
+      url: `https://raw.githubusercontent.com/${repo}/${sha}/posts/${date}/${f}`,
+      video: f.endsWith('.mp4'),
+    }));
     const caption = fs.readFileSync(path.join(dir, 'caption.txt'), 'utf8').trim();
     postId = await instagram.publishCarousel({
       userId: env('IG_USER_ID'),
       token: env('IG_ACCESS_TOKEN'),
-      imageUrls,
+      items,
       caption,
     });
   }
