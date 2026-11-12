@@ -74,13 +74,22 @@ function postedBefore(state) {
   return { ids, keys };
 }
 
+// Playlist links come from playlists.json; a PLAYLIST_* secret overrides it if set.
+function playlistLink(p) {
+  if (process.env[ENV_NAME[p]]) return process.env[ENV_NAME[p]];
+  const file = path.join(ROOT, 'playlists.json');
+  const links = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+  if (!links[p]) throw new Error(`No link for the ${LABEL[p]} playlist yet. Add it to playlists.json.`);
+  return links[p];
+}
+
 async function pickTracks(state) {
   if (process.env.SAMPLE === 'true') return sampleTracks();
   const token = await spotify.getToken(env('SPOTIFY_CLIENT_ID'), env('SPOTIFY_CLIENT_SECRET'));
   const { ids, keys } = postedBefore(state);
   const picked = [];
   for (const p of PLAYLISTS) {
-    const all = await spotify.getPlaylistTracks(token, env(ENV_NAME[p]));
+    const all = await spotify.getPlaylistTracks(token, playlistLink(p));
     const skipped = [];
     const next = all.find((t) => {
       const key = songKey(t.artist, t.title);

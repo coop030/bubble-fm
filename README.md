@@ -38,7 +38,7 @@ The videos and images of every run can be downloaded from the run page under **A
 ### 2. Spotify
 1. Go to developer.spotify.com, log in with the Bubble FM Spotify account, open the Dashboard and create an app (any name; redirect URI can be `http://127.0.0.1:8888/callback`, it isn't used; tick "Web API").
 2. Copy its **Client ID** and **Client secret** into the secrets `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`.
-3. Make the three playlists **public**, then copy each playlist link (Share → Copy link) into the secrets `PLAYLIST_BREAKFAST`, `PLAYLIST_BOOGIE` and `PLAYLIST_DATENIGHT`.
+3. Make the three playlists **public** and put each playlist link (Share → Copy link) into `playlists.json` in this repo.
 
 At this point `manual` mode already works.
 
