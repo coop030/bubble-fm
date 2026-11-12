@@ -1,0 +1,115 @@
+{
+  "breakfast": [
+    {
+      "artist": "Hermanos Gutiérrez",
+      "title": "Los Andes",
+      "handlesMissing": [
+        "Hermanos Gutiérrez"
+      ]
+    },
+    {
+      "artist": "Angus Stone",
+      "title": "The Wolf and the Butler",
+      "handlesMissing": [
+        "Angus Stone"
+      ]
+    },
+    {
+      "artist": "Khruangbin",
+      "title": "May Ninth",
+      "handlesMissing": [
+        "Khruangbin"
+      ]
+    },
+    {
+      "artist": "HNNY",
+      "title": "Being In Love",
+      "handlesMissing": [
+        "HNNY"
+      ]
+    },
+    {
+      "artist": "Five and Tens",
+      "title": "Quiet Steps",
+      "handlesMissing": [
+        "Five and Tens"
+      ]
+    },
+    {
+      "artist": "Jonny Nash, Suzanne Kraft",
+      "title": "Time, Being",
+      "handlesMissing": [
+        "Jonny Nash",
+        "Suzanne Kraft"
+      ]
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "Brenton Wood",
+      "title": "Great Big Bundle Of Love",
+      "handlesMissing": [
+        "Brenton Wood"
+      ]
+    },
+    {
+      "artist": "Etta James",
+      "title": "A Sunday Kind Of Love",
+      "handlesMissing": [
+        "Etta James"
+      ]
+    },
+    {
+      "artist": "Barbara Lewis",
+      "title": "Baby, I'm Yours",
+      "handlesMissing": [
+        "Barbara Lewis"
+      ]
+    },
+    {
+      "artist": "Sam Cooke",
+      "title": "You Send Me - Mono",
+      "handlesMissing": [
+        "Sam Cooke"
+      ]
+    },
+    {
+      "artist": "Phil Phillips",
+      "title": "Sea of Love",
+      "handlesMissing": [
+        "Phil Phillips"
+      ]
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Is It Any Wonder?",
+      "handlesMissing": [
+        "Durand Jones & The Indications",
+        "Aaron Frazer"
+      ]
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "KYRIL",
+      "title": "This Dance",
+      "handlesMissing": [
+        "KYRIL"
+      ]
+    },
+    {
+      "artist": "Havantepe",
+      "title": "Calcite",
+      "handlesMissing": [
+        "Havantepe"
+      ]
+    },
+    {
+      "artist": "Long Island Sound",
+      "title": "I Still Love You",
+      "handlesMissing": [
+        "Long Island Sound"
+      ]
+    }
+  ]
+}
