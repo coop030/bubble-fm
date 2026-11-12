@@ -183,6 +183,9 @@ async function publish() {
   }
   state.history.push({ date, day: meta.day, instagramId: postId, tracks: meta.tracks.map((t) => `${t.artist} – ${t.title}`) });
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + '\n');
+  // The link page shows these as "today's three".
+  const latest = { date, day: meta.day, tracks: meta.tracks.map(({ playlist, title, artist, url, coverUrl }) => ({ playlist, title, artist, url, coverUrl })) };
+  fs.writeFileSync(path.join(ROOT, 'latest.json'), JSON.stringify(latest, null, 2) + '\n');
   meta.published = true;
   meta.instagramId = postId;
   fs.writeFileSync(metaFile, JSON.stringify(meta, null, 2) + '\n');

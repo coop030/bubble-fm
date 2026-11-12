@@ -95,6 +95,6 @@ jobs:
       - name: Remember what was posted
         if: env.MODE == 'post' || env.MODE == 'manual'
         run: |
-          git add state.json posts
+          git add state.json latest.json posts
           git diff --cached --quiet || git commit -m "Posted day for $(date +%F)"
           git push
