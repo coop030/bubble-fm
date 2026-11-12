@@ -119,17 +119,17 @@
   <nav class="links" aria-label="Links">
     <a class="btn breakfast" data-link="breakfast" href="#">
       <img src="covers/breakfast.jpg" alt="">
-      <span class="text">breakfast<small>slow mornings · on Spotify</small></span>
+      <span class="text">breakfast<small>slow mornings | on Spotify</small></span>
       <svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
     <a class="btn boogie" data-link="boogie" href="#">
       <img src="covers/boogie.jpg" alt="">
-      <span class="text">boogie<small>house to move to · on Spotify</small></span>
+      <span class="text">boogie<small>house to move to | on Spotify</small></span>
       <svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
     <a class="btn datenight" data-link="datenight" href="#">
       <img src="covers/datenight.jpg" alt="">
-      <span class="text">date night<small>soul for two · on Spotify</small></span>
+      <span class="text">date night<small>soul for two | on Spotify</small></span>
       <svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
     <a class="btn" data-link="loveLetter" href="#" hidden>
@@ -205,6 +205,7 @@
         a.rel = 'noopener';
         const img = el('img');
         img.src = t.coverUrl || 'covers/' + t.playlist + '.jpg';
+        img.onerror = () => { img.onerror = null; img.src = 'covers/' + t.playlist + '.jpg'; };
         img.alt = '';
         const meta = el('span', 'meta');
         meta.append(el('span', 'label', LABEL[t.playlist] || t.playlist), el('span', 'title', t.title), el('span', 'artist', t.artist));
