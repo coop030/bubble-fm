@@ -65,6 +65,11 @@ SAMPLE=true node src/index.js prepare
 ```
 The videos (`.mp4`) and stills (`.jpg`) land in `posts/<date>/`. Rendering takes about a minute.
 
+## Tagging artists
+Each track slide tags its artists on Instagram. Handles come from `artists.json` (`"Artist Name": "handle"`), which is checked by hand, because guessing could tag the wrong person. Artists without a handle are listed in the run log and in `upcoming.json` inside each post folder, which also lists every artist still waiting in the playlists. If Instagram refuses a tag (private account, renamed handle), that slide is posted without it.
+
+Slides and caption run breakfast → date night → boogie.
+
 ## Link page
 The link-in-bio page lives in `docs/` and is published at **https://coop030.github.io/bubble-fm/**. Every change to `docs/` on `main` publishes itself. Button links are at the top of the script in `docs/index.html`; an empty link hides its button. "Today's three" reads `latest.json`, which every post updates.
 

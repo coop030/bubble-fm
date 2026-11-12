@@ -38,6 +38,8 @@ jobs:
       SAMPLE: ${{ inputs.sample && 'true' || 'false' }}
       MODE: ${{ inputs.mode || vars.SCHEDULED_MODE || 'preview' }}
       ANIMATE: ${{ vars.ANIMATE || 'true' }}
+      # A preview always renders fresh, even if today's post already exists.
+      FORCE: ${{ (inputs.mode || vars.SCHEDULED_MODE || 'preview') == 'preview' && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v4
 

@@ -36,18 +36,27 @@ async function waitUntilReady(id, token) {
   throw new Error(`Instagram took too long to process ${id}`);
 }
 
-// items: [{ url, video }] — images must be JPEG, videos MP4.
+// items: [{ url, video, tags }] — images must be JPEG, videos MP4, tags are Instagram usernames.
 async function publishCarousel({ userId, token, items, caption }) {
   const children = [];
   for (const item of items) {
     const params = item.video
       ? { media_type: 'VIDEO', video_url: item.url }
       : { image_url: item.url };
-    const { id } = await call('POST', `${userId}/media`, {
-      ...params,
-      is_carousel_item: 'true',
-      access_token: token,
-    });
+    const base = { ...params, is_carousel_item: 'true', access_token: token };
+    let id;
+    if (item.tags && item.tags.length) {
+      // Video tags have no position; image tags sit in the middle of the slide.
+      const userTags = item.tags.map((username) => (item.video ? { username } : { username, x: 0.5, y: 0.5 }));
+      try {
+        ({ id } = await call('POST', `${userId}/media`, { ...base, user_tags: JSON.stringify(userTags) }));
+        console.log(`Tagged ${item.tags.map((t) => '@' + t).join(', ')}.`);
+      } catch (err) {
+        // A tag can fail (private account, renamed handle, unsupported here). Post the slide anyway.
+        console.log(`Could not tag ${item.tags.join(', ')}: ${err.message}. Posting this slide without the tag.`);
+      }
+    }
+    if (!id) ({ id } = await call('POST', `${userId}/media`, base));
     children.push(id);
   }
   for (const id of children) await waitUntilReady(id, token);

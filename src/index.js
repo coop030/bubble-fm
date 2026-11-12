@@ -12,7 +12,8 @@ const { sampleTracks } = require('./sample');
 const ROOT = path.join(__dirname, '..');
 const STATE_FILE = path.join(ROOT, 'state.json');
 const POSTS_DIR = path.join(ROOT, 'posts');
-const PLAYLISTS = ['breakfast', 'boogie', 'datenight'];
+// Slide and caption order: breakfast, date night, boogie.
+const PLAYLISTS = ['breakfast', 'datenight', 'boogie'];
 const ENV_NAME = { breakfast: 'PLAYLIST_BREAKFAST', boogie: 'PLAYLIST_BOOGIE', datenight: 'PLAYLIST_DATENIGHT' };
 const LABEL = { breakfast: 'breakfast', boogie: 'boogie', datenight: 'date night' };
 
@@ -90,6 +91,7 @@ async function pickTracks(state) {
   if (!hasKeys) console.log('No Spotify keys set, reading the public playlist pages instead.');
   const { ids, keys } = postedBefore(state);
   const picked = [];
+  const remaining = {};
   for (const p of PLAYLISTS) {
     const all = token
       ? await spotify.getPlaylistTracks(token, playlistLink(p))
@@ -111,8 +113,36 @@ async function pickTracks(state) {
     ids.add(next.id);
     keys.add(songKey(next.artist, next.title));
     picked.push({ ...next, playlist: p, coverDataUri: await spotify.downloadAsDataUri(next.coverUrl) });
+    remaining[p] = all
+      .filter((t) => t.id !== next.id && !ids.has(t.id) && !keys.has(songKey(t.artist, t.title)))
+      .map((t) => ({ artist: t.artist, title: t.title }));
   }
+  picked.upcoming = remaining;
   return picked;
+}
+
+// Instagram handles live in artists.json ("Artist Name": "handle"), checked by hand,
+// because guessing a handle risks tagging a stranger.
+function loadHandles() {
+  const file = path.join(ROOT, 'artists.json');
+  const raw = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+  const map = new Map();
+  for (const [name, handle] of Object.entries(raw)) {
+    if (handle) map.set(name.trim().toLowerCase(), String(handle).replace(/^@/, '').trim());
+  }
+  return map;
+}
+
+function handlesFor(track, map) {
+  const artists = String(track.artist).split(/\s*,\s*/).filter(Boolean);
+  const found = [];
+  const missing = [];
+  for (const a of artists) {
+    const h = map.get(a.toLowerCase());
+    if (h) found.push(h);
+    else missing.push(a);
+  }
+  return { found, missing };
 }
 
 async function prepare() {
@@ -136,13 +166,30 @@ async function prepare() {
   });
   const caption = buildCaption(day, tracks);
   fs.writeFileSync(path.join(dir, 'caption.txt'), caption + '\n');
+  const handleMap = loadHandles();
+  const missingHandles = [];
   const meta = {
     date,
     day,
     published: false,
-    tracks: tracks.map(({ coverDataUri, ...t }) => t),
+    tracks: tracks.map(({ coverDataUri, ...t }) => {
+      const { found, missing } = handlesFor(t, handleMap);
+      missingHandles.push(...missing);
+      return { ...t, instagram: found };
+    }),
     files,
   };
+  if (missingHandles.length) {
+    console.log(`No Instagram handle yet for: ${missingHandles.join(', ')}. Add them to artists.json to tag them.`);
+  }
+  // Every artist still waiting in the playlists, so their handles can be looked up ahead of time.
+  if (tracks.upcoming) {
+    const upcoming = {};
+    for (const [p, list] of Object.entries(tracks.upcoming)) {
+      upcoming[p] = list.map((t) => ({ ...t, handlesMissing: handlesFor(t, handleMap).missing }));
+    }
+    fs.writeFileSync(path.join(dir, 'upcoming.json'), JSON.stringify(upcoming, null, 2) + '\n');
+  }
   fs.writeFileSync(path.join(dir, 'post.json'), JSON.stringify(meta, null, 2) + '\n');
   console.log(`Prepared day ${day} in posts/${date}:\n\n${caption}`);
 }
@@ -161,9 +208,11 @@ async function publish() {
   if (process.env.MODE !== 'manual') {
     const repo = env('GITHUB_REPOSITORY');
     const sha = env('PUBLISH_SHA');
-    const items = meta.files.map((f) => ({
+    // Slide 1 is the cover; slides 2-4 carry the tracks in order, each tagging its artists.
+    const items = meta.files.map((f, i) => ({
       url: `https://raw.githubusercontent.com/${repo}/${sha}/posts/${date}/${f}`,
       video: f.endsWith('.mp4'),
+      tags: i === 0 ? [] : (meta.tracks[i - 1]?.instagram || []),
     }));
     const caption = fs.readFileSync(path.join(dir, 'caption.txt'), 'utf8').trim();
     postId = await instagram.publishCarousel({
