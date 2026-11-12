@@ -63,5 +63,8 @@ SAMPLE=true node src/index.js prepare
 ```
 The videos (`.mp4`) and stills (`.jpg`) land in `posts/<date>/`. Rendering takes about a minute.
 
+## Playlist covers
+`covers/` has a cover for each playlist: `<name>.jpg` (3000 × 3000) to upload in the Spotify app, and `<name>-640.jpg` (under 256 KB, Spotify's limit for uploads through its API). To change them, edit `src/covers.js` and run `node src/covers.js`.
+
 ## Fonts
 `fonts/` contains Bagel Fat One and Fredoka, both under the SIL Open Font License, which allows bundling them here.

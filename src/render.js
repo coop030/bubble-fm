@@ -356,4 +356,4 @@ async function renderPost(day, tracks, { animate = true } = {}) {
   return out;
 }
 
-module.exports = { renderPost, coverSvg, trackSvg, W, H };
+module.exports = { renderPost, coverSvg, trackSvg, W, H, DEFS, HEART, SPARK, bubble, stickerText, icon, glow, FONTS };
