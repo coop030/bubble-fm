@@ -32,9 +32,9 @@ const today = () =>
 
 function buildCaption(day, tracks) {
   const lines = [
-    `day ${String(day).padStart(3, '0')} · music to fall in love to`,
+    `day ${String(day).padStart(3, '0')} | music to fall in love to`,
     '',
-    ...tracks.map((t) => `${LABEL[t.playlist]} · ${t.artist} – ${t.title}`),
+    ...tracks.map((t) => `${LABEL[t.playlist]} | ${t.artist} – ${t.title}`),
     '',
     'All three are in the playlists, link in bio.',
     '',
