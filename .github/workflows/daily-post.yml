@@ -61,21 +61,19 @@ jobs:
       - name: Save the preview to the previews branch
         if: env.MODE == 'preview'
         run: |
-          OUT="$RUNNER_TEMP/preview"
-          mkdir -p "$OUT" && cp -r posts/. "$OUT/"
           git config user.name "bubble-fm-bot"
           git config user.email "bubble-fm-bot@users.noreply.github.com"
-          if git ls-remote --exit-code origin previews >/dev/null; then
-            git fetch -q origin previews && git checkout -q -B previews FETCH_HEAD
+          PV="$RUNNER_TEMP/previews"
+          if git fetch -q origin previews:refs/remotes/origin/previews 2>/dev/null; then
+            git worktree add -q -B previews "$PV" origin/previews
           else
-            git checkout -q --orphan previews && git rm -rfq --cached .
+            git worktree add -q --orphan -b previews "$PV"
           fi
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          git checkout -q FETCH_HEAD -- . 2>/dev/null || true
-          for d in "$OUT"/*/; do
+          for d in posts/*/; do
             name="$(basename "$d")-run${GITHUB_RUN_NUMBER}"
-            mkdir -p "$name" && cp -r "$d". "$name/"
+            mkdir -p "$PV/$name" && cp -r "$d". "$PV/$name/"
           done
+          cd "$PV"
           git add -A
           git commit -qm "Preview from run ${GITHUB_RUN_NUMBER}"
           git push -q origin previews
