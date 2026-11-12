@@ -1,6 +1,9 @@
-// Publishes a carousel through the Instagram API (Instagram Login, professional account).
+// Publishes a carousel through the Instagram API. New Meta apps use the Facebook Graph host
+// with a system user token (never expires); set IG_GRAPH_HOST=graph.instagram.com for an
+// Instagram-login token instead.
 const VERSION = process.env.IG_GRAPH_VERSION || 'v23.0';
-const BASE = `https://graph.instagram.com/${VERSION}`;
+const HOST = process.env.IG_GRAPH_HOST || 'graph.facebook.com';
+const BASE = `https://${HOST}/${VERSION}`;
 
 async function call(method, path, params) {
   const url = new URL(`${BASE}/${path}`);

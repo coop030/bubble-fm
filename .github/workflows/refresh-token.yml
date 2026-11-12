@@ -1,9 +1,8 @@
 name: Refresh Instagram token
 
-# Instagram tokens expire after 60 days. This renews it every two weeks.
+# Only needed for 60-day Instagram-login tokens. The system user token Bubble FM uses
+# never expires, so this runs only when started by hand.
 on:
-  schedule:
-    - cron: '13 4 1,15 * *'
   workflow_dispatch:
 
 jobs:

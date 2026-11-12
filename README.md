@@ -43,16 +43,13 @@ The videos and images of every run can be downloaded from the run page under **A
 At this point `manual` mode already works.
 
 ### 3. Instagram (for `post` mode)
-1. In the Instagram app, switch the Bubble FM account to a **Professional** account (Creator or Business).
-2. Go to developers.facebook.com, create an app and add the **Instagram** product, choosing the setup with **Instagram login** (Meta renames these menus now and then).
-3. Add the Bubble FM Instagram account there and generate an access token with the permissions `instagram_business_basic` and `instagram_business_content_publish`.
-4. Copy the token into the secret `IG_ACCESS_TOKEN` and the Instagram account's user ID (shown next to the token) into `IG_USER_ID`.
-5. Run **Daily post** once by hand with mode `post`. When that works, set the repository variable `SCHEDULED_MODE` to `post`.
+Bubble FM posts through a Meta app ("Bubble FM Poster") owned by the "Bubble FM" business portfolio, which holds only the @bubblefm030 Instagram account. A system user in that portfolio has access to the app and to @bubblefm030 and nothing else, so the app can't post anywhere but Bubble FM.
 
-### 4. Keep the token alive
-Instagram tokens expire after 60 days. The **Refresh Instagram token** workflow renews it on the 1st and 15th of each month. It needs permission to update the secret:
-1. On GitHub go to **Settings (your profile) → Developer settings → Fine-grained tokens** and create a token for this repo only with **Secrets: Read and write**.
-2. Save it in the repo as the secret `SECRETS_TOKEN`.
+The repo needs two secrets:
+- `IG_ACCESS_TOKEN`: the system user's token (permissions `instagram_basic` and `instagram_content_publish`, never expires)
+- `IG_USER_ID`: `17841460524384737` (the Instagram ID of @bubblefm030)
+
+Run **Daily post** once by hand with mode `post`. When that works, set the repository variable `SCHEDULED_MODE` to `post`.
 
 ## Changing the time
 Edit the `cron` line in `.github/workflows/daily-post.yml`. It's in UTC: `37 7 * * *` is 08:37 in Berlin in winter and 09:37 in summer. GitHub sometimes starts scheduled runs a few minutes late.
