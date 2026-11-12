@@ -1,0 +1,102 @@
+name: Daily post
+
+on:
+  schedule:
+    # 08:37 Berlin in winter (07:37 UTC). GitHub can start scheduled runs a few minutes late.
+    - cron: '37 7 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'preview = images only, manual = images + mark tracks as used (you post), post = post to Instagram'
+        type: choice
+        options: [preview, manual, post]
+        default: preview
+      sample:
+        description: 'Use sample tracks instead of Spotify'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+      SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+      PLAYLIST_BREAKFAST: ${{ secrets.PLAYLIST_BREAKFAST }}
+      PLAYLIST_BOOGIE: ${{ secrets.PLAYLIST_BOOGIE }}
+      PLAYLIST_DATENIGHT: ${{ secrets.PLAYLIST_DATENIGHT }}
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      SAMPLE: ${{ inputs.sample && 'true' || 'false' }}
+      MODE: ${{ inputs.mode || vars.SCHEDULED_MODE || 'preview' }}
+      ANIMATE: ${{ vars.ANIMATE || 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Make today's post
+        run: node src/index.js prepare
+
+      - name: Keep the images for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubble-fm-post
+          path: posts/
+          retention-days: 14
+
+      - name: Save the preview to the previews branch
+        if: env.MODE == 'preview'
+        run: |
+          OUT="$RUNNER_TEMP/preview"
+          mkdir -p "$OUT" && cp -r posts/. "$OUT/"
+          git config user.name "bubble-fm-bot"
+          git config user.email "bubble-fm-bot@users.noreply.github.com"
+          if git ls-remote --exit-code origin previews >/dev/null; then
+            git fetch -q origin previews && git checkout -q -B previews FETCH_HEAD
+          else
+            git checkout -q --orphan previews && git rm -rfq --cached .
+          fi
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          git checkout -q FETCH_HEAD -- . 2>/dev/null || true
+          for d in "$OUT"/*/; do
+            name="$(basename "$d")-run${GITHUB_RUN_NUMBER}"
+            mkdir -p "$name" && cp -r "$d". "$name/"
+          done
+          git add -A
+          git commit -qm "Preview from run ${GITHUB_RUN_NUMBER}"
+          git push -q origin previews
+
+      - name: Save the images to the repo
+        if: env.MODE == 'post'
+        run: |
+          git config user.name "bubble-fm-bot"
+          git config user.email "bubble-fm-bot@users.noreply.github.com"
+          git add posts
+          git diff --cached --quiet || git commit -m "Post images for $(date +%F)"
+          git push
+          echo "PUBLISH_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Post to Instagram (or just mark the tracks as used in manual mode)
+        if: env.MODE == 'post' || env.MODE == 'manual'
+        run: node src/index.js publish
+
+      - name: Remember what was posted
+        if: env.MODE == 'post' || env.MODE == 'manual'
+        run: |
+          git add state.json posts
+          git diff --cached --quiet || git commit -m "Posted day for $(date +%F)"
+          git push

@@ -1,0 +1,18 @@
+{
+  "name": "bubble-fm",
+  "version": "1.0.0",
+  "description": "Bubble FM daily Instagram post",
+  "scripts": {
+    "prepare-post": "node src/index.js prepare",
+    "preview": "SAMPLE=true node src/index.js prepare"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "ffmpeg-static": "^5.3.0",
+    "sharp": "^0.35.5"
+  },
+  "private": "true"
+}
