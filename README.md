@@ -1,0 +1,64 @@
+# Bubble FM daily post
+
+Every morning this repo picks the next song from each of the three Spotify playlists (Breakfast, Boogie, Date Night), builds the Bubble FM carousel (cover + three track slides with the album art in a bubble, 1080 × 1440), writes the caption and posts it to Instagram.
+
+It runs on GitHub Actions, so nothing needs to stay switched on at home.
+
+## How it picks songs
+
+For each playlist it takes the first song (in playlist order) that hasn't been posted yet. Posted songs are remembered in `state.json`. Add new songs anywhere in the playlist and they'll come up in turn. If a playlist runs out of new songs, that day's run stops and says which playlist needs more.
+
+## Three modes
+
+| Mode | What happens |
+|---|---|
+| `preview` | Makes the images. Nothing is posted or remembered. Good for testing. |
+| `manual` | Makes the images and remembers the songs as used. You download the images from the run and post them yourself. |
+| `post` | Makes the images and posts the carousel to Instagram automatically. |
+
+The daily schedule uses whatever the repository variable `SCHEDULED_MODE` says (`preview` if it isn't set). You can also start a run by hand: **Actions → Daily post → Run workflow**, pick a mode, and tick "Use sample tracks" to try it without Spotify.
+
+The images of every run can be downloaded from the run page under **Artifacts → bubble-fm-post**.
+
+## Setup
+
+### 1. GitHub
+1. Create a new **public** repository and upload everything in this folder. It has to be public because Instagram fetches the images from the repo's raw links.
+2. In the repo go to **Settings → Secrets and variables → Actions**.
+
+### 2. Spotify
+1. Go to developer.spotify.com, log in with the Bubble FM Spotify account, open the Dashboard and create an app (any name; redirect URI can be `http://127.0.0.1:8888/callback`, it isn't used; tick "Web API").
+2. Copy its **Client ID** and **Client secret** into the secrets `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`.
+3. Make the three playlists **public**, then copy each playlist link (Share → Copy link) into the secrets `PLAYLIST_BREAKFAST`, `PLAYLIST_BOOGIE` and `PLAYLIST_DATENIGHT`.
+
+At this point `manual` mode already works.
+
+### 3. Instagram (for `post` mode)
+1. In the Instagram app, switch the Bubble FM account to a **Professional** account (Creator or Business).
+2. Go to developers.facebook.com, create an app and add the **Instagram** product, choosing the setup with **Instagram login** (Meta renames these menus now and then).
+3. Add the Bubble FM Instagram account there and generate an access token with the permissions `instagram_business_basic` and `instagram_business_content_publish`.
+4. Copy the token into the secret `IG_ACCESS_TOKEN` and the Instagram account's user ID (shown next to the token) into `IG_USER_ID`.
+5. Run **Daily post** once by hand with mode `post`. When that works, set the repository variable `SCHEDULED_MODE` to `post`.
+
+### 4. Keep the token alive
+Instagram tokens expire after 60 days. The **Refresh Instagram token** workflow renews it on the 1st and 15th of each month. It needs permission to update the secret:
+1. On GitHub go to **Settings (your profile) → Developer settings → Fine-grained tokens** and create a token for this repo only with **Secrets: Read and write**.
+2. Save it in the repo as the secret `SECRETS_TOKEN`.
+
+## Changing the time
+Edit the `cron` line in `.github/workflows/daily-post.yml`. It's in UTC: `37 7 * * *` is 08:37 in Berlin in winter and 09:37 in summer. GitHub sometimes starts scheduled runs a few minutes late.
+
+## Limits worth knowing
+- Posts made through the API can't have music attached. Add the songs in Stories by hand.
+- Instagram only accepts JPEG images for posts, which is what this makes.
+- If Spotify changes what apps may read, the playlist step can break. The error message in the run will say what went wrong.
+
+## Try it locally
+```
+npm ci
+SAMPLE=true node src/index.js prepare
+```
+The images land in `posts/<date>/`.
+
+## Fonts
+`fonts/` contains Bagel Fat One and Fredoka, both under the SIL Open Font License, which allows bundling them here.
