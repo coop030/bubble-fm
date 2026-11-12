@@ -167,7 +167,7 @@ async function publish() {
     }));
     const caption = fs.readFileSync(path.join(dir, 'caption.txt'), 'utf8').trim();
     postId = await instagram.publishCarousel({
-      userId: env('IG_USER_ID'),
+      userId: process.env.IG_USER_ID || '17841460524384737', // @bubblefm030
       token: env('IG_ACCESS_TOKEN'),
       items,
       caption,

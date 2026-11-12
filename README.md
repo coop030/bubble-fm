@@ -45,9 +45,7 @@ At this point `manual` mode already works.
 ### 3. Instagram (for `post` mode)
 Bubble FM posts through a Meta app ("Bubble FM Poster") owned by the "Bubble FM" business portfolio, which holds only the @bubblefm030 Instagram account. A system user in that portfolio has access to the app and to @bubblefm030 and nothing else, so the app can't post anywhere but Bubble FM.
 
-The repo needs two secrets:
-- `IG_ACCESS_TOKEN`: the system user's token (permissions `instagram_basic` and `instagram_content_publish`, never expires)
-- `IG_USER_ID`: `17841460524384737` (the Instagram ID of @bubblefm030)
+The repo needs one secret, `IG_ACCESS_TOKEN`: the system user's token (permissions `instagram_basic` and `instagram_content_publish`, never expires). The Instagram ID of @bubblefm030 (`17841460524384737`) is built into the app; an `IG_USER_ID` secret would override it.
 
 Run **Daily post** once by hand with mode `post`. When that works, set the repository variable `SCHEDULED_MODE` to `post`.
 
