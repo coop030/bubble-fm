@@ -23,7 +23,7 @@ const env = (name, required = true) => {
 };
 
 function loadState() {
-  if (!fs.existsSync(STATE_FILE)) return { day: 0, posted: { breakfast: [], boogie: [], datenight: [] }, history: [] };
+  if (!fs.existsSync(STATE_FILE)) return { day: 0, posted: { breakfast: [], boogie: [], datenight: [] }, postedKeys: [], history: [] };
   return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
 }
 
@@ -43,17 +43,60 @@ function buildCaption(day, tracks) {
   return lines.join('\n');
 }
 
+// The same song can sit in two playlists or exist as several Spotify versions (single,
+// album, remaster), each with its own ID. This key catches those: first artist + title
+// without bracketed or dashed extras like "(Remastered 2011)" or "- Radio Edit".
+function songKey(artist, title) {
+  const clean = (s) =>
+    String(s)
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/\s[-–]\s.*$/, '')
+      .replace(/[([].*?[)\]]/g, '')
+      .replace(/\b(feat|ft|featuring)\b.*$/, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  const firstArtist = String(artist).split(/,|&| x | and /i)[0];
+  return `${clean(firstArtist)}|${clean(title)}`;
+}
+
+// Everything that has ever been posted, from any playlist.
+function postedBefore(state) {
+  const ids = new Set(Object.values(state.posted || {}).flat());
+  const keys = new Set(state.postedKeys || []);
+  for (const h of state.history || []) {
+    for (const t of h.tracks || []) {
+      const [artist, ...rest] = String(t).split(' – ');
+      if (rest.length) keys.add(songKey(artist, rest.join(' – ')));
+    }
+  }
+  return { ids, keys };
+}
+
 async function pickTracks(state) {
   if (process.env.SAMPLE === 'true') return sampleTracks();
   const token = await spotify.getToken(env('SPOTIFY_CLIENT_ID'), env('SPOTIFY_CLIENT_SECRET'));
+  const { ids, keys } = postedBefore(state);
   const picked = [];
   for (const p of PLAYLISTS) {
     const all = await spotify.getPlaylistTracks(token, env(ENV_NAME[p]));
-    const done = new Set(state.posted[p] || []);
-    const next = all.find((t) => !done.has(t.id));
+    const skipped = [];
+    const next = all.find((t) => {
+      const key = songKey(t.artist, t.title);
+      if (ids.has(t.id) || keys.has(key)) {
+        skipped.push(`${t.artist} – ${t.title}`);
+        return false;
+      }
+      return true;
+    });
     if (!next) {
-      throw new Error(`The ${LABEL[p]} playlist has no tracks left that weren't posted yet. Add new songs to it.`);
+      throw new Error(`The ${LABEL[p]} playlist has no songs left that were never posted before. Add new songs to it.`);
     }
+    if (skipped.length) console.log(`${LABEL[p]}: skipped ${skipped.length} song(s) already posted before.`);
+    // Also stops the same song showing up twice in one post.
+    ids.add(next.id);
+    keys.add(songKey(next.artist, next.title));
     picked.push({ ...next, playlist: p, coverDataUri: await spotify.downloadAsDataUri(next.coverUrl) });
   }
   return picked;
@@ -121,7 +164,9 @@ async function publish() {
   const state = loadState();
   state.day = meta.day;
   for (const t of meta.tracks) {
-    if (t.id && !t.id.startsWith('sample-')) (state.posted[t.playlist] ||= []).push(t.id);
+    if (!t.id || t.id.startsWith('sample-')) continue;
+    (state.posted[t.playlist] ||= []).push(t.id);
+    (state.postedKeys ||= []).push(songKey(t.artist, t.title));
   }
   state.history.push({ date, day: meta.day, instagramId: postId, tracks: meta.tracks.map((t) => `${t.artist} – ${t.title}`) });
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + '\n');

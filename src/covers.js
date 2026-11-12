@@ -8,21 +8,30 @@ const { DEFS, HEART, SPARK, bubble, stickerText, icon, glow, FONTS } = require('
 
 const S = 1000;
 
-const coffeeCup = `
-  <g transform="translate(500 500)">
-    <path d="M -40 -120 C -70 -150 -10 -170 -40 -205" stroke="#ffffff" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.85"/>
-    <path d="M 30 -115 C 0 -150 60 -170 30 -210" stroke="#ffffff" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.85"/>
-    ${icon(HEART, -20, -300, 60, '#ff5fb8', -10)}
-    <ellipse cx="0" cy="150" rx="210" ry="34" fill="#c98ae8"/>
-    <ellipse cx="0" cy="140" rx="210" ry="34" fill="#ffffff"/>
-    <path d="M 150 -40 C 250 -40 250 90 140 90" stroke="#ffffff" stroke-width="30" fill="none" stroke-linecap="round"/>
-    <path d="M -165 -90 L 165 -90 L 140 90 Q 130 140 80 140 L -80 140 Q -130 140 -140 90 Z" fill="#ffffff"/>
-    <path d="M -158 -40 L 158 -40 L 151 10 L -151 10 Z" fill="#ff8ad8"/>
-    <ellipse cx="0" cy="-90" rx="165" ry="30" fill="#8a4a2f"/>
-    <ellipse cx="0" cy="-90" rx="165" ry="30" fill="none" stroke="#ffffff" stroke-width="10"/>
-    <path d="M -110 -100 q 20 -8 40 0" stroke="#d9a07c" stroke-width="8" fill="none" stroke-linecap="round"/>
-    ${icon(HEART, -32, 40, 64, '#ff8ad8')}
-    <ellipse cx="-110" cy="-20" rx="16" ry="50" fill="#ffffff" opacity="0.0"/>
+// A croissant: one fat crescent with curved layer lines and glossy highlights.
+const croissant = `
+  <defs>
+    <linearGradient id="crust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffdc8f"/><stop offset="0.55" stop-color="#f5a84a"/><stop offset="1" stop-color="#d6802f"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(500 520)">
+    <ellipse cx="0" cy="130" rx="280" ry="26" fill="#c98ae8" opacity="0.45"/>
+    <path d="M -275 95 C -300 -70 -160 -190 0 -190 C 160 -190 300 -70 275 95 C 255 120 215 105 185 70 C 120 -5 -120 -5 -185 70 C -215 105 -255 120 -275 95 Z"
+      fill="url(#crust)" stroke="#c46a26" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M -70 -184 C -95 -120 -95 -60 -78 -12" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M 70 -184 C 95 -120 95 -60 78 -12" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M -180 -135 C -205 -70 -195 0 -168 52" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M 180 -135 C 205 -70 195 0 168 52" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M -250 -40 C -262 10 -255 55 -238 90" stroke="#c46a26" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M 250 -40 C 262 10 255 55 238 90" stroke="#c46a26" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <ellipse cx="-20" cy="-140" rx="44" ry="16" fill="#fff6dd" opacity="0.8" transform="rotate(-8 -20 -140)"/>
+    <ellipse cx="-135" cy="-110" rx="26" ry="11" fill="#fff6dd" opacity="0.7" transform="rotate(-35 -135 -110)"/>
+    <ellipse cx="125" cy="-115" rx="26" ry="11" fill="#fff6dd" opacity="0.7" transform="rotate(30 125 -115)"/>
+    ${icon(HEART, -40, -320, 80, '#ff5fb8', -10)}
+    ${icon(HEART, 70, -270, 46, '#ff9fd8', 12)}
+    ${icon(SPARK, 210, -160, 50, '#ffffff')}
+    ${icon(SPARK, -260, -140, 36, '#fff6b0')}
   </g>`;
 
 const discoBall = (() => {
@@ -73,7 +82,7 @@ const COVERS = {
   breakfast: {
     bg: ['#ffe4f5', '#f2b8ff'],
     glows: [['#ffd6aa', 820, 200, 420, 0.9], ['#8ff0ff', 150, 880, 420, 0.55]],
-    motif: coffeeCup,
+    motif: croissant,
     name: 'breakfast',
     top: '#7a2ad0',
     layers: ['#ffffff', '#ff7fc8'],

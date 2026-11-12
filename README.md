@@ -8,7 +8,14 @@ It runs on GitHub Actions, so nothing needs to stay switched on at home.
 
 ## How it picks songs
 
-For each playlist it takes the first song (in playlist order) that hasn't been posted yet. Posted songs are remembered in `state.json`. Add new songs anywhere in the playlist and they'll come up in turn. If a playlist runs out of new songs, that day's run stops and says which playlist needs more.
+For each playlist it takes the first song (in playlist order) that has never been posted before, in any of the three playlists. Before every post it checks the song against everything posted so far, both by its Spotify ID and by artist and title, so these count as the same song and are skipped:
+- the same track sitting in two playlists
+- another version of it, like a remaster, radio edit, remix or the album version of a single
+- the same song with a "feat." credit added
+
+It also never puts the same song in one post twice. Skipped songs are listed in the run log. Posted songs are remembered in `state.json`.
+
+Add new songs anywhere in a playlist and they'll come up in turn. If a playlist runs out of songs that were never posted, that day's run stops and says which playlist needs more.
 
 ## Three modes
 
