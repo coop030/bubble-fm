@@ -8,30 +8,38 @@ const { DEFS, HEART, SPARK, bubble, stickerText, icon, glow, FONTS } = require('
 
 const S = 1000;
 
-// A croissant: one fat crescent with curved layer lines and glossy highlights.
-const croissant = `
+// A French press: glass jug with coffee, lilac frame, plunger and a pink handle.
+const frenchPress = `
   <defs>
-    <linearGradient id="crust" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffdc8f"/><stop offset="0.55" stop-color="#f5a84a"/><stop offset="1" stop-color="#d6802f"/>
+    <linearGradient id="coffee" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a0603a"/><stop offset="1" stop-color="#5e3020"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b48cf0"/><stop offset="0.45" stop-color="#efe4ff"/><stop offset="1" stop-color="#9a6ae0"/>
     </linearGradient>
   </defs>
-  <g transform="translate(500 520)">
-    <ellipse cx="0" cy="130" rx="280" ry="26" fill="#c98ae8" opacity="0.45"/>
-    <path d="M -275 95 C -300 -70 -160 -190 0 -190 C 160 -190 300 -70 275 95 C 255 120 215 105 185 70 C 120 -5 -120 -5 -185 70 C -215 105 -255 120 -275 95 Z"
-      fill="url(#crust)" stroke="#c46a26" stroke-width="9" stroke-linejoin="round"/>
-    <path d="M -70 -184 C -95 -120 -95 -60 -78 -12" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <path d="M 70 -184 C 95 -120 95 -60 78 -12" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <path d="M -180 -135 C -205 -70 -195 0 -168 52" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <path d="M 180 -135 C 205 -70 195 0 168 52" stroke="#c46a26" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <path d="M -250 -40 C -262 10 -255 55 -238 90" stroke="#c46a26" stroke-width="7" fill="none" stroke-linecap="round"/>
-    <path d="M 250 -40 C 262 10 255 55 238 90" stroke="#c46a26" stroke-width="7" fill="none" stroke-linecap="round"/>
-    <ellipse cx="-20" cy="-140" rx="44" ry="16" fill="#fff6dd" opacity="0.8" transform="rotate(-8 -20 -140)"/>
-    <ellipse cx="-135" cy="-110" rx="26" ry="11" fill="#fff6dd" opacity="0.7" transform="rotate(-35 -135 -110)"/>
-    <ellipse cx="125" cy="-115" rx="26" ry="11" fill="#fff6dd" opacity="0.7" transform="rotate(30 125 -115)"/>
-    ${icon(HEART, -40, -320, 80, '#ff5fb8', -10)}
-    ${icon(HEART, 70, -270, 46, '#ff9fd8', 12)}
-    ${icon(SPARK, 210, -160, 50, '#ffffff')}
-    ${icon(SPARK, -260, -140, 36, '#fff6b0')}
+  <g transform="translate(500 500)">
+    <ellipse cx="0" cy="250" rx="200" ry="24" fill="#c98ae8" opacity="0.45"/>
+    <rect x="-12" y="-330" width="24" height="110" rx="10" fill="url(#metal)"/>
+    <circle cx="0" cy="-340" r="34" fill="#ff8ad8"/>
+    <circle cx="-10" cy="-350" r="10" fill="#ffffff" opacity="0.8"/>
+    <path d="M 120 -120 C 240 -120 240 140 120 140" stroke="#ff8ad8" stroke-width="38" fill="none" stroke-linecap="round"/>
+    <path d="M 132 -100 C 205 -95 205 0 160 10" stroke="#ffffff" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <rect x="-130" y="-170" width="260" height="400" rx="34" fill="#ffffff" opacity="0.35"/>
+    <path d="M -126 -30 L 126 -30 L 126 196 Q 126 226 96 226 L -96 226 Q -126 226 -126 196 Z" fill="url(#coffee)"/>
+    <ellipse cx="0" cy="-30" rx="126" ry="16" fill="#d9a07c"/>
+    <rect x="-130" y="-170" width="260" height="400" rx="34" fill="none" stroke="#ffffff" stroke-width="8"/>
+    <rect x="-150" y="-226" width="300" height="64" rx="28" fill="url(#metal)"/>
+    <rect x="-150" y="-226" width="300" height="64" rx="28" fill="none" stroke="#ffffff" stroke-width="5" opacity="0.7"/>
+    <rect x="-146" y="40" width="292" height="26" rx="13" fill="url(#metal)"/>
+    <rect x="-150" y="210" width="300" height="44" rx="20" fill="url(#metal)"/>
+    <rect x="-96" y="-150" width="22" height="330" rx="11" fill="#ffffff" opacity="0.55"/>
+    ${icon(HEART, -32, 100, 64, '#ff8ad8')}
+    <path d="M -60 -270 C -85 -300 -35 -320 -60 -355" stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.8"/>
+    <path d="M 60 -270 C 35 -300 85 -320 60 -355" stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.8"/>
+    ${icon(HEART, 90, -400, 56, '#ff5fb8', 12)}
+    ${icon(SPARK, -250, -150, 46, '#ffffff')}
+    ${icon(SPARK, 230, 180, 34, '#fff6b0')}
   </g>`;
 
 const discoBall = (() => {
@@ -82,7 +90,7 @@ const COVERS = {
   breakfast: {
     bg: ['#ffe4f5', '#f2b8ff'],
     glows: [['#ffd6aa', 820, 200, 420, 0.9], ['#8ff0ff', 150, 880, 420, 0.55]],
-    motif: croissant,
+    motif: frenchPress,
     name: 'breakfast',
     top: '#7a2ad0',
     layers: ['#ffffff', '#ff7fc8'],
