@@ -70,6 +70,9 @@ SAMPLE=true node src/index.js prepare
 ```
 The videos (`.mp4`) and stills (`.jpg`) land in `posts/<date>/`. Rendering takes about a minute.
 
+## Link page
+The link-in-bio page lives in `docs/` and is published at **https://coop030.github.io/bubble-fm/**. Every change to `docs/` on `main` publishes itself. Button links are at the top of the script in `docs/index.html`; an empty link hides its button. "Today's three" reads `latest.json`, which every post updates.
+
 ## Playlist covers
 `covers/` has a cover for each playlist: `<name>.jpg` (3000 × 3000) to upload in the Spotify app, and `<name>-640.jpg` (under 256 KB, Spotify's limit for uploads through its API). To change them, edit `src/covers.js` and run `node src/covers.js`.
 
