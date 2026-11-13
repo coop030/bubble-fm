@@ -1,20 +1,26 @@
 {
-  "day": 1,
+  "day": 2,
   "posted": {
     "breakfast": [
-      "3KEXmUk5H8I1gkBUT6SUFn"
+      "3KEXmUk5H8I1gkBUT6SUFn",
+      "2K266BGPMo7loEL0Pzghjd"
     ],
     "boogie": [
-      "1tL7TiCia7icnjGOCjdL5x"
+      "1tL7TiCia7icnjGOCjdL5x",
+      "0TGTJGVglCOBlW03j2DkOf"
     ],
     "datenight": [
-      "3HNp9HQ33wdDhAvEc4arE8"
+      "3HNp9HQ33wdDhAvEc4arE8",
+      "3MwwB2aY7xDrHqmbYL0iYf"
     ]
   },
   "postedKeys": [
     "jonny nash|ditto",
     "david alvarado|aire",
-    "richard hawley|open up your door"
+    "richard hawley|open up your door",
+    "coulou s cafe|next time i ll be a frog in a mossy glen",
+    "leon bridges|your love is electric",
+    "soire|everything must fade"
   ],
   "history": [
     {
@@ -25,6 +31,16 @@
         "Jonny Nash – Ditto",
         "David Alvarado – Aire",
         "Richard Hawley – Open up Your Door"
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "day": 2,
+      "instagramId": "18640199887025011",
+      "tracks": [
+        "coulou's cafe, COULOU – next time i’ll be a frog in a mossy glen",
+        "Leon Bridges – Your Love Is Electric",
+        "Soire – Everything Must Fade"
       ]
     }
   ]
