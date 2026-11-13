@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-13",
+  "day": 2,
+  "published": false,
+  "tracks": [
+    {
+      "id": "2K266BGPMo7loEL0Pzghjd",
+      "title": "next time i’ll be a frog in a mossy glen",
+      "artist": "coulou's cafe, COULOU",
+      "url": "https://open.spotify.com/track/2K266BGPMo7loEL0Pzghjd",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27315c405e63ec6db7e6575befc",
+      "playlist": "breakfast",
+      "instagram": []
+    },
+    {
+      "id": "3MwwB2aY7xDrHqmbYL0iYf",
+      "title": "Your Love Is Electric",
+      "artist": "Leon Bridges",
+      "url": "https://open.spotify.com/track/3MwwB2aY7xDrHqmbYL0iYf",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27359adae48f8ee1de1369b837a",
+      "playlist": "datenight",
+      "instagram": [
+        "leonbridges"
+      ]
+    },
+    {
+      "id": "0TGTJGVglCOBlW03j2DkOf",
+      "title": "Everything Must Fade",
+      "artist": "Soire",
+      "url": "https://open.spotify.com/track/0TGTJGVglCOBlW03j2DkOf",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273f6f56444b8858997b7f1f405",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ]
+}

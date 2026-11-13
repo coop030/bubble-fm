@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-12",
+  "day": 1,
+  "published": true,
+  "tracks": [
+    {
+      "id": "3KEXmUk5H8I1gkBUT6SUFn",
+      "title": "Ditto",
+      "artist": "Jonny Nash",
+      "url": "https://open.spotify.com/track/3KEXmUk5H8I1gkBUT6SUFn",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273d1c6fa2371f7bd79af359794",
+      "playlist": "breakfast"
+    },
+    {
+      "id": "1tL7TiCia7icnjGOCjdL5x",
+      "title": "Aire",
+      "artist": "David Alvarado",
+      "url": "https://open.spotify.com/track/1tL7TiCia7icnjGOCjdL5x",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27344228090993d51965609fc3d",
+      "playlist": "boogie"
+    },
+    {
+      "id": "3HNp9HQ33wdDhAvEc4arE8",
+      "title": "Open up Your Door",
+      "artist": "Richard Hawley",
+      "url": "https://open.spotify.com/track/3HNp9HQ33wdDhAvEc4arE8",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2738b94dcc1fa5641b582fd8f9b",
+      "playlist": "datenight"
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": "18144006952614951"
+}
