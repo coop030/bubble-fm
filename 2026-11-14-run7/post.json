@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-14",
+  "day": 3,
+  "published": false,
+  "tracks": [
+    {
+      "id": "3HGlaKMMFsTEaat5TZ9vJF",
+      "title": "Los Andes",
+      "artist": "Hermanos Gutiérrez",
+      "url": "https://open.spotify.com/track/3HGlaKMMFsTEaat5TZ9vJF",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2733bf5d054280b224056d9b935",
+      "playlist": "breakfast",
+      "instagram": [
+        "hermanosgutierrez"
+      ]
+    },
+    {
+      "id": "7xbsIq5auyv8sOuyOvlVAE",
+      "title": "Great Big Bundle Of Love",
+      "artist": "Brenton Wood",
+      "url": "https://open.spotify.com/track/7xbsIq5auyv8sOuyOvlVAE",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273de5ccc73594b86e04e223a53",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "1OSsU75ZoLKWjYYSfSxGEP",
+      "title": "This Dance",
+      "artist": "KYRIL",
+      "url": "https://open.spotify.com/track/1OSsU75ZoLKWjYYSfSxGEP",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273d07153a5580a2be3013d7a41",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ]
+}

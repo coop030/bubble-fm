@@ -1,0 +1,96 @@
+{
+  "breakfast": [
+    {
+      "artist": "Angus Stone",
+      "title": "The Wolf and the Butler",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Khruangbin",
+      "title": "May Ninth",
+      "handlesMissing": [
+        "Khruangbin"
+      ]
+    },
+    {
+      "artist": "HNNY",
+      "title": "Being In Love",
+      "handlesMissing": [
+        "HNNY"
+      ]
+    },
+    {
+      "artist": "Five and Tens",
+      "title": "Quiet Steps",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Jonny Nash, Suzanne Kraft",
+      "title": "Time, Being",
+      "handlesMissing": []
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "Etta James",
+      "title": "A Sunday Kind Of Love",
+      "handlesMissing": [
+        "Etta James"
+      ]
+    },
+    {
+      "artist": "Barbara Lewis",
+      "title": "Baby, I'm Yours",
+      "handlesMissing": [
+        "Barbara Lewis"
+      ]
+    },
+    {
+      "artist": "Sam Cooke",
+      "title": "You Send Me - Mono",
+      "handlesMissing": [
+        "Sam Cooke"
+      ]
+    },
+    {
+      "artist": "Phil Phillips",
+      "title": "Sea of Love",
+      "handlesMissing": [
+        "Phil Phillips"
+      ]
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Is It Any Wonder?",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Ride or Die",
+      "handlesMissing": []
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "Havantepe",
+      "title": "Calcite",
+      "handlesMissing": [
+        "Havantepe"
+      ]
+    },
+    {
+      "artist": "Long Island Sound",
+      "title": "I Still Love You",
+      "handlesMissing": [
+        "Long Island Sound"
+      ]
+    },
+    {
+      "artist": "Janeret",
+      "title": "Sūpā Saiya - Jin",
+      "handlesMissing": [
+        "Janeret"
+      ]
+    }
+  ]
+}
