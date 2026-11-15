@@ -1,3 +1,6 @@
 node_modules/
 .new-token
 .env
+# Post videos and stills live on the media/previews branches, not in main's history.
+posts/**/*.mp4
+posts/**/*.jpg

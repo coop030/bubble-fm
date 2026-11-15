@@ -38,6 +38,7 @@ jobs:
       SAMPLE: ${{ inputs.sample && 'true' || 'false' }}
       MODE: ${{ inputs.mode || vars.SCHEDULED_MODE || 'preview' }}
       ANIMATE: ${{ vars.ANIMATE || 'true' }}
+      VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS || '30' }}
       # A preview always renders fresh, even if today's post already exists.
       FORCE: ${{ (inputs.mode || vars.SCHEDULED_MODE || 'preview') == 'preview' && 'true' || 'false' }}
     steps:
@@ -60,34 +61,37 @@ jobs:
           path: posts/
           retention-days: 14
 
+      # Videos never go into main's history (30-second loops would bloat the repo).
+      # previews and media are single-commit branches that get replaced on every run.
       - name: Save the preview to the previews branch
         if: env.MODE == 'preview'
         run: |
           git config user.name "bubble-fm-bot"
           git config user.email "bubble-fm-bot@users.noreply.github.com"
           PV="$RUNNER_TEMP/previews"
-          if git fetch -q origin previews:refs/remotes/origin/previews 2>/dev/null; then
-            git worktree add -q -B previews "$PV" origin/previews
-          else
-            git worktree add -q --orphan -b previews "$PV"
-          fi
+          git worktree add -q --orphan -b preview-tmp "$PV"
           for d in posts/*/; do
             name="$(basename "$d")-run${GITHUB_RUN_NUMBER}"
             mkdir -p "$PV/$name" && cp -r "$d". "$PV/$name/"
           done
           cd "$PV"
-          git add -A
+          git add -A -f
           git commit -qm "Preview from run ${GITHUB_RUN_NUMBER}"
-          git push -q origin previews
+          git push -q -f origin HEAD:previews
 
-      - name: Save the images to the repo
+      - name: Put today's videos online for Instagram
         if: env.MODE == 'post'
         run: |
           git config user.name "bubble-fm-bot"
           git config user.email "bubble-fm-bot@users.noreply.github.com"
-          git add posts
-          git diff --cached --quiet || git commit -m "Post images for $(date +%F)"
-          git push
+          DAY="$(TZ=Europe/Berlin date +%F)"
+          MD="$RUNNER_TEMP/media"
+          git worktree add -q --orphan -b media-tmp "$MD"
+          mkdir -p "$MD/posts/$DAY" && cp -r "posts/$DAY/." "$MD/posts/$DAY/"
+          cd "$MD"
+          git add -A -f
+          git commit -qm "Media for $DAY"
+          git push -q -f origin HEAD:media
           echo "PUBLISH_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - name: Post to Instagram (or just mark the tracks as used in manual mode)

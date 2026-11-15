@@ -2,7 +2,7 @@
 
 Every morning this repo picks the next song from each of the three Spotify playlists (Breakfast, Boogie, Date Night), builds the Bubble FM carousel (cover + three track slides with the album art in a bubble), writes the caption and posts it to Instagram.
 
-Each slide is a 6-second seamless loop at 1080 × 1350 (4:5): the bubbles float, sway and breathe, tiny bubbles rise through the frame, sparkles twinkle and the background colour shifts very slightly. A still JPEG of every slide is saved too. Instagram's API only accepts 4:5 or wider, which is why the slides aren't 3:4; in the grid Instagram trims a sliver off the sides, and nothing important sits there.
+Each slide is a 30-second seamless loop at 1080 × 1350 (4:5): the bubbles float, sway and breathe, tiny bubbles rise through the frame, sparkles twinkle and the background colour shifts very slightly. A still JPEG of every slide is saved too. Instagram's API only accepts 4:5 or wider, which is why the slides aren't 3:4; in the grid Instagram trims a sliver off the sides, and nothing important sits there.
 
 It runs on GitHub Actions, so nothing needs to stay switched on at home.
 
@@ -64,6 +64,9 @@ npm ci
 SAMPLE=true node src/index.js prepare
 ```
 The videos (`.mp4`) and stills (`.jpg`) land in `posts/<date>/`. Rendering takes about a minute.
+
+## Where the videos live
+Videos and stills are kept out of `main` so the repo stays small. The `media` branch holds only the current day's files (Instagram fetches them from there) and the `previews` branch only the latest preview. Both are replaced on every run. Every run's files can also be downloaded for 14 days from the run page (Artifacts). Loop length is set with the repository variable `VIDEO_SECONDS` (default 30).
 
 ## Tagging artists
 Each track slide tags its artists on Instagram. Handles come from `artists.json` (`"Artist Name": "handle"`), which is checked by hand, because guessing could tag the wrong person. Artists without a handle are listed in the run log and in `upcoming.json` inside each post folder, which also lists every artist still waiting in the playlists. If Instagram refuses a tag (private account, renamed handle), that slide is posted without it.

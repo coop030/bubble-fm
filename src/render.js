@@ -12,7 +12,9 @@ const os = require('os');
 const W = 1080;
 const H = 1350;
 const FPS = Number(process.env.VIDEO_FPS || 30);
-const SECONDS = Number(process.env.VIDEO_SECONDS || 6);
+const SECONDS = Number(process.env.VIDEO_SECONDS || 30);
+// Bubbles keep the pace of a 6-second cycle however long the loop is; the background drifts once per loop.
+const K = Math.max(1, Math.round(SECONDS / 6));
 const FONTS = ['BagelFatOne-Regular.ttf', 'Fredoka-Medium.ttf', 'Fredoka-Bold.ttf'].map((f) =>
   path.join(__dirname, '..', 'fonts', f)
 );
@@ -85,7 +87,12 @@ function rng(seed) {
 }
 
 // Loop helpers: every motion uses whole cycles per loop, so the last frame meets the first.
-const wave = (p, cycles, phase) => Math.sin(TAU * (p * cycles + phase));
+const wave = (p, cycles, phase) => Math.sin(TAU * (p * cycles * K + phase));
+// Slow motion for the background: whole cycles over the full loop.
+const slow = (p, cycles, phase) => Math.sin(TAU * (p * cycles + phase));
+// Bobbing uses one extra cycle per loop so it drifts against the sway and the loop doesn't
+// visibly repeat every 6 seconds. Still whole cycles, so the loop stays seamless.
+const bob = (b, p) => Math.sin(TAU * (p * (b.cy * K + 1) + b.ph + 0.25));
 
 const icon = (d, x, y, size, fill, rot = 0, opacity = 1) =>
   `<path d="${d}" fill="${fill}" opacity="${opacity.toFixed(2)}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)} ${size / 2} ${size / 2}) scale(${(size / 24).toFixed(3)})"/>`;
@@ -113,7 +120,7 @@ function bubble(x, y, r, { art = false } = {}) {
 // A floating bubble that bobs, sways and breathes a little.
 function floating(b, p, extra) {
   const x = b.x + b.sway * wave(p, b.cx, b.ph);
-  const y = b.y + b.bob * wave(p, b.cy, b.ph + 0.25);
+  const y = b.y + b.bob * bob(b, p);
   const r = b.r * (1 + 0.025 * wave(p, 2, b.ph));
   return { x, y, r, svg: bubble(x, y, r, extra) };
 }
@@ -127,7 +134,8 @@ function risers(seed, p, count) {
     const size = 10 + r() * 18;
     const start = r();
     const span = H + 120;
-    const y = H + 60 - (((start + p) % 1) * span);
+    const passes = K + (i % 2);
+    const y = H + 60 - (((start + p * passes) % 1) * span);
     const x = x0 + 18 * wave(p, 2, r());
     out += bubble(x, y, size);
   }
@@ -178,7 +186,7 @@ function hsl(h, sat, l) {
 function driftColors(day, p) {
   const phase = ((day - 1) % 60) / 30;
   const t = phase <= 1 ? phase : 2 - phase;
-  const shift = 5 * wave(p, 1, 0);
+  const shift = 5 * slow(p, 1, 0);
   const h = 328 - t * 72 + shift;
   const l = 80 - t * 52;
   return {
@@ -209,21 +217,21 @@ function coverSvg(day, p = 0, scene = coverScene(day)) {
   const c = driftColors(day, p);
   const dayStr = String(day).padStart(3, '0');
   const big = floating(scene.big, p);
-  const orbit = (x, y, rad, ph) => [x + rad * wave(p, 1, ph), y + rad * wave(p, 1, ph + 0.25)];
+  const orbit = (x, y, rad, ph) => [x + rad * slow(p, 2, ph), y + rad * slow(p, 2, ph + 0.25)];
   const [g1x, g1y] = orbit(160, 1140, 60, 0);
   const [g2x, g2y] = orbit(960, 140, 50, 0.4);
   const [g3x, g3y] = orbit(scene.glowX, scene.glowY, 70, 0.7);
   const [hx, hy, hs, hph] = scene.heart;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>${DEFS}
-    <linearGradient id="bg" x1="${(0.3 + 0.05 * wave(p, 1, 0.1)).toFixed(3)}" y1="0" x2="${(0.7 - 0.05 * wave(p, 1, 0.1)).toFixed(3)}" y2="1"><stop offset="0" stop-color="${c.top}"/><stop offset="1" stop-color="${c.bottom}"/></linearGradient>
+    <linearGradient id="bg" x1="${(0.3 + 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y1="0" x2="${(0.7 - 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y2="1"><stop offset="0" stop-color="${c.top}"/><stop offset="1" stop-color="${c.bottom}"/></linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   ${glow('#8ff0ff', g1x, g1y, 520, 0.55)}
   ${glow('#ff8ad8', g2x, g2y, 460, 0.6)}
   ${glow('#ffd6aa', g3x, g3y, 360, Math.max(0.08, 0.38 - c.t * 0.28))}
   ${risers(day, p, 5)}
-  ${shadow(big.x + 20, scene.big.y + scene.big.r + 70, scene.big.r * 0.75 * (1 - 0.06 * wave(p, 1, scene.big.ph + 0.25)), 34)}
+  ${shadow(big.x + 20, scene.big.y + scene.big.r + 70, scene.big.r * 0.75 * (1 - 0.06 * bob(scene.big, p)), 34)}
   ${big.svg}
   ${floating(scene.mid, p).svg}
   ${floating(scene.small, p).svg}
@@ -257,7 +265,7 @@ function trackSvg(track, p = 0, scene = trackScene(track)) {
   const a = fit(track.artist, 860, 48, 34, 0.52);
   const art = floating(scene.art, p, { art: true });
   const R = scene.art.r;
-  const shift = 4 * wave(p, 1, 0);
+  const shift = 4 * slow(p, 1, 0);
   const [s0, s1] = st.stops;
   const bg = `<linearGradient id="slideBg" x1="0" y1="0" x2="${st.vertical ? 0 : 1}" y2="1">
     <stop offset="0" stop-color="${hsl(s0[0] + shift, s0[1], s0[2])}"/>
@@ -270,9 +278,9 @@ function trackSvg(track, p = 0, scene = trackScene(track)) {
     <clipPath id="artClip"><circle cx="${art.x.toFixed(1)}" cy="${art.y.toFixed(1)}" r="${(art.r - 26 * (art.r / R)).toFixed(1)}"/></clipPath>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#slideBg)"/>
-  ${st.blobs.map(([col, x, y, rad, op], i) => glow(col, x + 50 * wave(p, 1, i * 0.37), y + 50 * wave(p, 1, i * 0.37 + 0.25), rad, op)).join('')}
+  ${st.blobs.map(([col, x, y, rad, op], i) => glow(col, x + 50 * slow(p, 2, i * 0.37), y + 50 * slow(p, 2, i * 0.37 + 0.25), rad, op)).join('')}
   ${risers(track.index * 13 + 5, p, 4)}
-  ${shadow(art.x, scene.art.y + R + 40, R * 0.7 * (1 - 0.05 * wave(p, 1, scene.art.ph + 0.25)), 40)}
+  ${shadow(art.x, scene.art.y + R + 40, R * 0.7 * (1 - 0.05 * bob(scene.art, p)), 40)}
   ${image}
   ${art.svg}
   ${floating(scene.a, p).svg}
@@ -315,7 +323,7 @@ function toVideo(svgAt) {
       '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS), '-i', '-',
       '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo',
       '-map', '0:v', '-map', '1:a', '-shortest',
-      '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-pix_fmt', 'yuv420p',
+      '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-pix_fmt', 'yuv420p',
       '-profile:v', 'high', '-movflags', '+faststart',
       '-c:a', 'aac', '-b:a', '64k',
       tmp,

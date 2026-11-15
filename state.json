@@ -1,17 +1,20 @@
 {
-  "day": 2,
+  "day": 3,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
-      "2K266BGPMo7loEL0Pzghjd"
+      "2K266BGPMo7loEL0Pzghjd",
+      "3HGlaKMMFsTEaat5TZ9vJF"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
-      "0TGTJGVglCOBlW03j2DkOf"
+      "0TGTJGVglCOBlW03j2DkOf",
+      "0JO8xHuiUJMjxiBHNgKTj5"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
-      "3MwwB2aY7xDrHqmbYL0iYf"
+      "3MwwB2aY7xDrHqmbYL0iYf",
+      "7xbsIq5auyv8sOuyOvlVAE"
     ]
   },
   "postedKeys": [
@@ -20,7 +23,10 @@
     "richard hawley|open up your door",
     "coulou s cafe|next time i ll be a frog in a mossy glen",
     "leon bridges|your love is electric",
-    "soire|everything must fade"
+    "soire|everything must fade",
+    "hermanos gutierrez|los andes",
+    "brenton wood|great big bundle of love",
+    "havantepe|calcite"
   ],
   "history": [
     {
@@ -41,6 +47,16 @@
         "coulou's cafe, COULOU – next time i’ll be a frog in a mossy glen",
         "Leon Bridges – Your Love Is Electric",
         "Soire – Everything Must Fade"
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "day": 3,
+      "instagramId": null,
+      "tracks": [
+        "Hermanos Gutiérrez – Los Andes",
+        "Brenton Wood – Great Big Bundle Of Love",
+        "Havantepe – Calcite"
       ]
     }
   ]
