@@ -70,10 +70,8 @@ jobs:
           git config user.email "bubble-fm-bot@users.noreply.github.com"
           PV="$RUNNER_TEMP/previews"
           git worktree add -q --orphan -b preview-tmp "$PV"
-          for d in posts/*/; do
-            name="$(basename "$d")-run${GITHUB_RUN_NUMBER}"
-            mkdir -p "$PV/$name" && cp -r "$d". "$PV/$name/"
-          done
+          DAY="$(TZ=Europe/Berlin date +%F)"
+          mkdir -p "$PV/$DAY-run${GITHUB_RUN_NUMBER}" && cp -r "posts/$DAY/." "$PV/$DAY-run${GITHUB_RUN_NUMBER}/"
           cd "$PV"
           git add -A -f
           git commit -qm "Preview from run ${GITHUB_RUN_NUMBER}"
