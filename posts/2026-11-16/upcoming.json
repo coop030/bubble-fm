@@ -1,0 +1,158 @@
+{
+  "breakfast": [
+    {
+      "artist": "HNNY",
+      "title": "Being In Love",
+      "handlesMissing": [
+        "HNNY"
+      ]
+    },
+    {
+      "artist": "Five and Tens",
+      "title": "Quiet Steps",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Jonny Nash, Suzanne Kraft",
+      "title": "Time, Being",
+      "handlesMissing": []
+    },
+    {
+      "artist": "The California Honeydrops, Amethyst Starr",
+      "title": "Lead Me Home",
+      "handlesMissing": [
+        "The California Honeydrops",
+        "Amethyst Starr"
+      ]
+    },
+    {
+      "artist": "Five and Tens",
+      "title": "Life Happens to Us All",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Lords of Lounge",
+      "title": "Palisades",
+      "handlesMissing": [
+        "Lords of Lounge"
+      ]
+    },
+    {
+      "artist": "Bremer/McCoy",
+      "title": "Opstigning",
+      "handlesMissing": [
+        "Bremer/McCoy"
+      ]
+    },
+    {
+      "artist": "Astrocolor",
+      "title": "Cosmosis",
+      "handlesMissing": [
+        "Astrocolor"
+      ]
+    },
+    {
+      "artist": "Jake Xerxes Fussell",
+      "title": "16–20",
+      "handlesMissing": [
+        "Jake Xerxes Fussell"
+      ]
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "Sam Cooke",
+      "title": "You Send Me - Mono",
+      "handlesMissing": [
+        "Sam Cooke"
+      ]
+    },
+    {
+      "artist": "Phil Phillips",
+      "title": "Sea of Love",
+      "handlesMissing": [
+        "Phil Phillips"
+      ]
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Is It Any Wonder?",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Ride or Die",
+      "handlesMissing": []
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "Swayzak",
+      "title": "Goose",
+      "handlesMissing": [
+        "Swayzak"
+      ]
+    },
+    {
+      "artist": "Fresh & Low",
+      "title": "7 Miles Up",
+      "handlesMissing": [
+        "Fresh & Low"
+      ]
+    },
+    {
+      "artist": "Vakula",
+      "title": "U're Made Of Sound",
+      "handlesMissing": [
+        "Vakula"
+      ]
+    },
+    {
+      "artist": "St Germain",
+      "title": "Easy to Remember",
+      "handlesMissing": [
+        "St Germain"
+      ]
+    },
+    {
+      "artist": "Malin Genie, Selidos, Havantepe",
+      "title": "Come the Morning - Havantepe Remix",
+      "handlesMissing": [
+        "Malin Genie",
+        "Selidos",
+        "Havantepe"
+      ]
+    },
+    {
+      "artist": "Jump Source, Priori, Patrick Holland",
+      "title": "Radiant Shift",
+      "handlesMissing": [
+        "Jump Source",
+        "Priori",
+        "Patrick Holland"
+      ]
+    },
+    {
+      "artist": "LOYOTO",
+      "title": "Karmadog",
+      "handlesMissing": [
+        "LOYOTO"
+      ]
+    },
+    {
+      "artist": "Frank & Tony, DJ Sprinkles",
+      "title": "Companion",
+      "handlesMissing": [
+        "Frank & Tony",
+        "DJ Sprinkles"
+      ]
+    },
+    {
+      "artist": "Mood II Swing",
+      "title": "Sunlight In My Eyes",
+      "handlesMissing": [
+        "Mood II Swing"
+      ]
+    }
+  ]
+}
