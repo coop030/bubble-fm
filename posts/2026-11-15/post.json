@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15",
+  "day": 4,
+  "published": true,
+  "tracks": [
+    {
+      "id": "2hWlgAgIpOkOTgASEttxSr",
+      "title": "The Wolf and the Butler",
+      "artist": "Angus Stone",
+      "url": "https://open.spotify.com/track/2hWlgAgIpOkOTgASEttxSr",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273a528db60cce05deef079d36f",
+      "playlist": "breakfast",
+      "instagram": [
+        "angusstone_"
+      ]
+    },
+    {
+      "id": "0zGLlXbHlrAyBN1x6sY0rb",
+      "title": "A Sunday Kind Of Love",
+      "artist": "Etta James",
+      "url": "https://open.spotify.com/track/0zGLlXbHlrAyBN1x6sY0rb",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273b2229a8fdf377abaf3652624",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "4MfYwipgiY4EgjtEjdSF8Q",
+      "title": "I Still Love You",
+      "artist": "Long Island Sound",
+      "url": "https://open.spotify.com/track/4MfYwipgiY4EgjtEjdSF8Q",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2737b02be73e27627a88651d1b3",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": null
+}

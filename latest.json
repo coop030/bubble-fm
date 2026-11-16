@@ -1,27 +1,27 @@
 {
-  "date": "2026-11-14",
-  "day": 3,
+  "date": "2026-11-15",
+  "day": 4,
   "tracks": [
     {
       "playlist": "breakfast",
-      "title": "Los Andes",
-      "artist": "Hermanos Gutiérrez",
-      "url": "https://open.spotify.com/track/3HGlaKMMFsTEaat5TZ9vJF",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2733bf5d054280b224056d9b935"
+      "title": "The Wolf and the Butler",
+      "artist": "Angus Stone",
+      "url": "https://open.spotify.com/track/2hWlgAgIpOkOTgASEttxSr",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273a528db60cce05deef079d36f"
     },
     {
       "playlist": "datenight",
-      "title": "Great Big Bundle Of Love",
-      "artist": "Brenton Wood",
-      "url": "https://open.spotify.com/track/7xbsIq5auyv8sOuyOvlVAE",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273de5ccc73594b86e04e223a53"
+      "title": "A Sunday Kind Of Love",
+      "artist": "Etta James",
+      "url": "https://open.spotify.com/track/0zGLlXbHlrAyBN1x6sY0rb",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273b2229a8fdf377abaf3652624"
     },
     {
       "playlist": "boogie",
-      "title": "Calcite",
-      "artist": "Havantepe",
-      "url": "https://open.spotify.com/track/0JO8xHuiUJMjxiBHNgKTj5",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273f342048a24bc2c71650f6b79"
+      "title": "I Still Love You",
+      "artist": "Long Island Sound",
+      "url": "https://open.spotify.com/track/4MfYwipgiY4EgjtEjdSF8Q",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2737b02be73e27627a88651d1b3"
     }
   ]
 }
