@@ -1,26 +1,29 @@
 {
-  "day": 5,
+  "day": 6,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
       "2K266BGPMo7loEL0Pzghjd",
       "3HGlaKMMFsTEaat5TZ9vJF",
       "2hWlgAgIpOkOTgASEttxSr",
-      "5yVGW2o9LXaiiS4I3HUM3k"
+      "5yVGW2o9LXaiiS4I3HUM3k",
+      "3ENYeb7501VXnI4pNfD12F"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
       "0TGTJGVglCOBlW03j2DkOf",
       "0JO8xHuiUJMjxiBHNgKTj5",
       "4MfYwipgiY4EgjtEjdSF8Q",
-      "5xljhmDnUtlDYZUIrYU5Dr"
+      "5xljhmDnUtlDYZUIrYU5Dr",
+      "4Tm6yzomZ00E2P8EkmGbiJ"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
       "3MwwB2aY7xDrHqmbYL0iYf",
       "7xbsIq5auyv8sOuyOvlVAE",
       "0zGLlXbHlrAyBN1x6sY0rb",
-      "0Yxy8FQLrkh6HmA7c305z1"
+      "0Yxy8FQLrkh6HmA7c305z1",
+      "0vOe8JXoL7IwZwXw1jAKG6"
     ]
   },
   "postedKeys": [
@@ -38,7 +41,10 @@
     "long island sound|i still love you",
     "khruangbin|may ninth",
     "barbara lewis|baby i m yours",
-    "janeret|supa saiya"
+    "janeret|supa saiya",
+    "hnny|being in love",
+    "sam cooke|you send me",
+    "swayzak|goose"
   ],
   "history": [
     {
@@ -89,6 +95,16 @@
         "Khruangbin – May Ninth",
         "Barbara Lewis – Baby, I'm Yours",
         "Janeret – Sūpā Saiya - Jin"
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "day": 6,
+      "instagramId": "17977408401152050",
+      "tracks": [
+        "HNNY – Being In Love",
+        "Sam Cooke – You Send Me - Mono",
+        "Swayzak – Goose"
       ]
     }
   ]
