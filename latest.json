@@ -1,27 +1,27 @@
 {
-  "date": "2026-11-17",
-  "day": 6,
+  "date": "2026-11-18",
+  "day": 7,
   "tracks": [
     {
       "playlist": "breakfast",
-      "title": "Being In Love",
-      "artist": "HNNY",
-      "url": "https://open.spotify.com/track/3ENYeb7501VXnI4pNfD12F",
-      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2733629c93b45c85e32e05ae855"
+      "title": "Quiet Steps",
+      "artist": "Five and Tens",
+      "url": "https://open.spotify.com/track/54X1QKPrLE3FgsKmJqit5H",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273b8770defeb58b6449090fcd5"
     },
     {
       "playlist": "datenight",
-      "title": "You Send Me - Mono",
-      "artist": "Sam Cooke",
-      "url": "https://open.spotify.com/track/0vOe8JXoL7IwZwXw1jAKG6",
-      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27378c838889cbf5bf9e97f556e"
+      "title": "Is It Any Wonder?",
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "url": "https://open.spotify.com/track/3sXAAkkejrZAs57QHjnuZf",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27390310b29c260b6e29fea1f69"
     },
     {
       "playlist": "boogie",
-      "title": "Goose",
-      "artist": "Swayzak",
-      "url": "https://open.spotify.com/track/4Tm6yzomZ00E2P8EkmGbiJ",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27353434e7cafd9db5840a1cf77"
+      "title": "7 Miles Up",
+      "artist": "Fresh & Low",
+      "url": "https://open.spotify.com/track/490cYZOtzZChJYSwZogKFo",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273c0def0ec1c5ae1c74d865806"
     }
   ]
 }

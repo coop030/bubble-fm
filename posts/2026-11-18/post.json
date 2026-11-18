@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-18",
+  "day": 7,
+  "published": true,
+  "tracks": [
+    {
+      "id": "54X1QKPrLE3FgsKmJqit5H",
+      "title": "Quiet Steps",
+      "artist": "Five and Tens",
+      "url": "https://open.spotify.com/track/54X1QKPrLE3FgsKmJqit5H",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273b8770defeb58b6449090fcd5",
+      "playlist": "breakfast",
+      "instagram": [
+        "fiveandtens"
+      ]
+    },
+    {
+      "id": "3sXAAkkejrZAs57QHjnuZf",
+      "title": "Is It Any Wonder?",
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "url": "https://open.spotify.com/track/3sXAAkkejrZAs57QHjnuZf",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27390310b29c260b6e29fea1f69",
+      "playlist": "datenight",
+      "instagram": [
+        "durandjonesandtheindications",
+        "aaron_frazer"
+      ]
+    },
+    {
+      "id": "490cYZOtzZChJYSwZogKFo",
+      "title": "7 Miles Up",
+      "artist": "Fresh & Low",
+      "url": "https://open.spotify.com/track/490cYZOtzZChJYSwZogKFo",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273c0def0ec1c5ae1c74d865806",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": "18502734502098432"
+}
