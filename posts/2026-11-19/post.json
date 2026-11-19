@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-19",
+  "day": 8,
+  "published": true,
+  "tracks": [
+    {
+      "id": "6CSQGGObzhr6rRmYsatoSq",
+      "title": "Time, Being",
+      "artist": "Jonny Nash, Suzanne Kraft",
+      "url": "https://open.spotify.com/track/6CSQGGObzhr6rRmYsatoSq",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27372b81e04edab9e6155525342",
+      "playlist": "breakfast",
+      "instagram": [
+        "melodyastruth",
+        "suzannekraft"
+      ]
+    },
+    {
+      "id": "0TdPo2fSEvO7k3XOYQyjU6",
+      "title": "Sea of Love",
+      "artist": "Phil Phillips",
+      "url": "https://open.spotify.com/track/0TdPo2fSEvO7k3XOYQyjU6",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2732d76efcd24ecf46cecc9e916",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "7uM0hFVKbIwqlBj0fnqDFO",
+      "title": "U're Made Of Sound",
+      "artist": "Vakula",
+      "url": "https://open.spotify.com/track/7uM0hFVKbIwqlBj0fnqDFO",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2736469b8a7398b2aafa6d3623a",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": "18649206616004606"
+}

@@ -1,27 +1,27 @@
 {
-  "date": "2026-11-18",
-  "day": 7,
+  "date": "2026-11-19",
+  "day": 8,
   "tracks": [
     {
       "playlist": "breakfast",
-      "title": "Quiet Steps",
-      "artist": "Five and Tens",
-      "url": "https://open.spotify.com/track/54X1QKPrLE3FgsKmJqit5H",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273b8770defeb58b6449090fcd5"
+      "title": "Time, Being",
+      "artist": "Jonny Nash, Suzanne Kraft",
+      "url": "https://open.spotify.com/track/6CSQGGObzhr6rRmYsatoSq",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27372b81e04edab9e6155525342"
     },
     {
       "playlist": "datenight",
-      "title": "Is It Any Wonder?",
-      "artist": "Durand Jones & The Indications, Aaron Frazer",
-      "url": "https://open.spotify.com/track/3sXAAkkejrZAs57QHjnuZf",
-      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27390310b29c260b6e29fea1f69"
+      "title": "Sea of Love",
+      "artist": "Phil Phillips",
+      "url": "https://open.spotify.com/track/0TdPo2fSEvO7k3XOYQyjU6",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2732d76efcd24ecf46cecc9e916"
     },
     {
       "playlist": "boogie",
-      "title": "7 Miles Up",
-      "artist": "Fresh & Low",
-      "url": "https://open.spotify.com/track/490cYZOtzZChJYSwZogKFo",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273c0def0ec1c5ae1c74d865806"
+      "title": "U're Made Of Sound",
+      "artist": "Vakula",
+      "url": "https://open.spotify.com/track/7uM0hFVKbIwqlBj0fnqDFO",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2736469b8a7398b2aafa6d3623a"
     }
   ]
 }
