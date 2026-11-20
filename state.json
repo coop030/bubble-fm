@@ -1,5 +1,5 @@
 {
-  "day": 8,
+  "day": 9,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
@@ -9,7 +9,8 @@
       "5yVGW2o9LXaiiS4I3HUM3k",
       "3ENYeb7501VXnI4pNfD12F",
       "54X1QKPrLE3FgsKmJqit5H",
-      "6CSQGGObzhr6rRmYsatoSq"
+      "6CSQGGObzhr6rRmYsatoSq",
+      "64A1s4UbNdMlYSeyKnx8x9"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
@@ -19,7 +20,8 @@
       "5xljhmDnUtlDYZUIrYU5Dr",
       "4Tm6yzomZ00E2P8EkmGbiJ",
       "490cYZOtzZChJYSwZogKFo",
-      "7uM0hFVKbIwqlBj0fnqDFO"
+      "7uM0hFVKbIwqlBj0fnqDFO",
+      "7nnE9yOGuPhPtFMnhm6gRu"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
@@ -29,7 +31,8 @@
       "0Yxy8FQLrkh6HmA7c305z1",
       "0vOe8JXoL7IwZwXw1jAKG6",
       "3sXAAkkejrZAs57QHjnuZf",
-      "0TdPo2fSEvO7k3XOYQyjU6"
+      "0TdPo2fSEvO7k3XOYQyjU6",
+      "0PYC777EjWywXUnojj0SEB"
     ]
   },
   "postedKeys": [
@@ -56,7 +59,10 @@
     "fresh|7 miles up",
     "jonny nash|time being",
     "phil phillips|sea of love",
-    "vakula|u re made of sound"
+    "vakula|u re made of sound",
+    "the california honeydrops|lead me home",
+    "day we ran|piha lounging",
+    "malin genie|come the morning"
   ],
   "history": [
     {
@@ -137,6 +143,16 @@
         "Jonny Nash, Suzanne Kraft – Time, Being",
         "Phil Phillips – Sea of Love",
         "Vakula – U're Made Of Sound"
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "day": 9,
+      "instagramId": "18046584761840795",
+      "tracks": [
+        "The California Honeydrops, Amethyst Starr – Lead Me Home",
+        "Day We Ran – Piha Lounging",
+        "Malin Genie, Selidos, Havantepe – Come the Morning - Havantepe Remix"
       ]
     }
   ]

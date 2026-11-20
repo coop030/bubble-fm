@@ -1,0 +1,106 @@
+{
+  "breakfast": [
+    {
+      "artist": "Five and Tens",
+      "title": "Life Happens to Us All",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Lords of Lounge",
+      "title": "Palisades",
+      "handlesMissing": [
+        "Lords of Lounge"
+      ]
+    },
+    {
+      "artist": "Bremer/McCoy",
+      "title": "Opstigning",
+      "handlesMissing": [
+        "Bremer/McCoy"
+      ]
+    },
+    {
+      "artist": "Astrocolor",
+      "title": "Cosmosis",
+      "handlesMissing": [
+        "Astrocolor"
+      ]
+    },
+    {
+      "artist": "Jake Xerxes Fussell",
+      "title": "16–20",
+      "handlesMissing": [
+        "Jake Xerxes Fussell"
+      ]
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "Curtis Mayfield",
+      "title": "Tripping Out",
+      "handlesMissing": [
+        "Curtis Mayfield"
+      ]
+    },
+    {
+      "artist": "Barry White",
+      "title": "Playing Your Game, Baby",
+      "handlesMissing": [
+        "Barry White"
+      ]
+    },
+    {
+      "artist": "mei anima",
+      "title": "Highway",
+      "handlesMissing": [
+        "mei anima"
+      ]
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Ride or Die",
+      "handlesMissing": []
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "Jump Source, Priori, Patrick Holland",
+      "title": "Radiant Shift",
+      "handlesMissing": [
+        "Jump Source",
+        "Priori",
+        "Patrick Holland"
+      ]
+    },
+    {
+      "artist": "LOYOTO",
+      "title": "Karmadog",
+      "handlesMissing": [
+        "LOYOTO"
+      ]
+    },
+    {
+      "artist": "Frank & Tony, DJ Sprinkles",
+      "title": "Companion",
+      "handlesMissing": [
+        "Frank & Tony",
+        "DJ Sprinkles"
+      ]
+    },
+    {
+      "artist": "Mood II Swing",
+      "title": "Sunlight In My Eyes",
+      "handlesMissing": [
+        "Mood II Swing"
+      ]
+    },
+    {
+      "artist": "Akabu, Jimpster",
+      "title": "Searchin - Jimpster Mix",
+      "handlesMissing": [
+        "Akabu",
+        "Jimpster"
+      ]
+    }
+  ]
+}

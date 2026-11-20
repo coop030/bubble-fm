@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-20",
+  "day": 9,
+  "published": true,
+  "tracks": [
+    {
+      "id": "64A1s4UbNdMlYSeyKnx8x9",
+      "title": "Lead Me Home",
+      "artist": "The California Honeydrops, Amethyst Starr",
+      "url": "https://open.spotify.com/track/64A1s4UbNdMlYSeyKnx8x9",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27367fe9ddf03fa0fbe9c3174ec",
+      "playlist": "breakfast",
+      "instagram": []
+    },
+    {
+      "id": "0PYC777EjWywXUnojj0SEB",
+      "title": "Piha Lounging",
+      "artist": "Day We Ran",
+      "url": "https://open.spotify.com/track/0PYC777EjWywXUnojj0SEB",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27387e40b003ddd5cfadf45b016",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "7nnE9yOGuPhPtFMnhm6gRu",
+      "title": "Come the Morning - Havantepe Remix",
+      "artist": "Malin Genie, Selidos, Havantepe",
+      "url": "https://open.spotify.com/track/7nnE9yOGuPhPtFMnhm6gRu",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2730478174039557df8f929e996",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": "18046584761840795"
+}
