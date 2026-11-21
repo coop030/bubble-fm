@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-21",
+  "day": 10,
+  "published": false,
+  "tracks": [
+    {
+      "id": "50tmrlcBfHrPp2ogy182wI",
+      "title": "Palisades",
+      "artist": "Lords of Lounge",
+      "url": "https://open.spotify.com/track/50tmrlcBfHrPp2ogy182wI",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27364a44e5549cf8599e32ff033",
+      "playlist": "breakfast",
+      "instagram": []
+    },
+    {
+      "id": "0mIpT5VijWPv4b9s0K76qA",
+      "title": "Tripping Out",
+      "artist": "Curtis Mayfield",
+      "url": "https://open.spotify.com/track/0mIpT5VijWPv4b9s0K76qA",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273410ad92537aec07ab1bf1da7",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "41LflMrHRumXjTMgmT8ATy",
+      "title": "Radiant Shift",
+      "artist": "Jump Source, Priori, Patrick Holland",
+      "url": "https://open.spotify.com/track/41LflMrHRumXjTMgmT8ATy",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2732b4b2bcf4c731d088d5d906c",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ]
+}
