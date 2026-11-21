@@ -1,27 +1,27 @@
 {
-  "date": "2026-11-20",
-  "day": 9,
+  "date": "2026-11-21",
+  "day": 10,
   "tracks": [
     {
       "playlist": "breakfast",
-      "title": "Lead Me Home",
-      "artist": "The California Honeydrops, Amethyst Starr",
-      "url": "https://open.spotify.com/track/64A1s4UbNdMlYSeyKnx8x9",
-      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b27367fe9ddf03fa0fbe9c3174ec"
+      "title": "Palisades",
+      "artist": "Lords of Lounge",
+      "url": "https://open.spotify.com/track/50tmrlcBfHrPp2ogy182wI",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27364a44e5549cf8599e32ff033"
     },
     {
       "playlist": "datenight",
-      "title": "Piha Lounging",
-      "artist": "Day We Ran",
-      "url": "https://open.spotify.com/track/0PYC777EjWywXUnojj0SEB",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27387e40b003ddd5cfadf45b016"
+      "title": "Tripping Out",
+      "artist": "Curtis Mayfield",
+      "url": "https://open.spotify.com/track/0mIpT5VijWPv4b9s0K76qA",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273410ad92537aec07ab1bf1da7"
     },
     {
       "playlist": "boogie",
-      "title": "Come the Morning - Havantepe Remix",
-      "artist": "Malin Genie, Selidos, Havantepe",
-      "url": "https://open.spotify.com/track/7nnE9yOGuPhPtFMnhm6gRu",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2730478174039557df8f929e996"
+      "title": "Radiant Shift",
+      "artist": "Jump Source, Priori, Patrick Holland",
+      "url": "https://open.spotify.com/track/41LflMrHRumXjTMgmT8ATy",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2732b4b2bcf4c731d088d5d906c"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "day": 9,
+  "day": 10,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
@@ -10,7 +10,8 @@
       "3ENYeb7501VXnI4pNfD12F",
       "54X1QKPrLE3FgsKmJqit5H",
       "6CSQGGObzhr6rRmYsatoSq",
-      "64A1s4UbNdMlYSeyKnx8x9"
+      "64A1s4UbNdMlYSeyKnx8x9",
+      "50tmrlcBfHrPp2ogy182wI"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
@@ -21,7 +22,8 @@
       "4Tm6yzomZ00E2P8EkmGbiJ",
       "490cYZOtzZChJYSwZogKFo",
       "7uM0hFVKbIwqlBj0fnqDFO",
-      "7nnE9yOGuPhPtFMnhm6gRu"
+      "7nnE9yOGuPhPtFMnhm6gRu",
+      "41LflMrHRumXjTMgmT8ATy"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
@@ -32,7 +34,8 @@
       "0vOe8JXoL7IwZwXw1jAKG6",
       "3sXAAkkejrZAs57QHjnuZf",
       "0TdPo2fSEvO7k3XOYQyjU6",
-      "0PYC777EjWywXUnojj0SEB"
+      "0PYC777EjWywXUnojj0SEB",
+      "0mIpT5VijWPv4b9s0K76qA"
     ]
   },
   "postedKeys": [
@@ -62,7 +65,10 @@
     "vakula|u re made of sound",
     "the california honeydrops|lead me home",
     "day we ran|piha lounging",
-    "malin genie|come the morning"
+    "malin genie|come the morning",
+    "lords of lounge|palisades",
+    "curtis mayfield|tripping out",
+    "jump source|radiant shift"
   ],
   "history": [
     {
@@ -153,6 +159,16 @@
         "The California Honeydrops, Amethyst Starr – Lead Me Home",
         "Day We Ran – Piha Lounging",
         "Malin Genie, Selidos, Havantepe – Come the Morning - Havantepe Remix"
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "day": 10,
+      "instagramId": "17958118410294757",
+      "tracks": [
+        "Lords of Lounge – Palisades",
+        "Curtis Mayfield – Tripping Out",
+        "Jump Source, Priori, Patrick Holland – Radiant Shift"
       ]
     }
   ]
