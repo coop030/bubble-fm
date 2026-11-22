@@ -65,6 +65,9 @@ SAMPLE=true node src/index.js prepare
 ```
 The videos (`.mp4`) and stills (`.jpg`) land in `posts/<date>/`. Rendering takes about a minute.
 
+## Drift into space
+From day 11 the colours slowly move from candy pink into deep space (dark indigo, nebula glows, stars, a small ringed planet) and arrive fully on day 24. The bubbles stay. Start and length are the repository variables `SPACE_START` (default 10) and `SPACE_DAYS` (default 14).
+
 ## Where the videos live
 Videos and stills are kept out of `main` so the repo stays small. The `media` branch holds only the current day's files (Instagram fetches them from there) and the `previews` branch only the latest preview. Both are replaced on every run. Every run's files can also be downloaded for 14 days from the run page (Artifacts). Loop length is set with the repository variable `VIDEO_SECONDS` (default 30).
 

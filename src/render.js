@@ -48,6 +48,13 @@ const PLAYLIST_STYLE = {
   },
 };
 
+// Where each playlist's colours end up once fully in space.
+const SPACE_STYLE = {
+  breakfast: { stops: ['#25317e', '#8a5cd6'], blobs: ['#ffb38a', '#3fa8ff'] },
+  boogie: { stops: ['#2a0f6e', '#9a1f8f'], blobs: ['#ff3fbf', '#5a7cff'] },
+  datenight: { stops: ['#0c0b2e', '#020210'], blobs: ['#4a3cff', '#c03fff'] },
+};
+
 const DEFS = `
   <radialGradient id="iri" cx="50%" cy="50%" r="50%">
     <stop offset="0" stop-color="#fff" stop-opacity="0.08"/>
@@ -182,6 +189,47 @@ function hsl(h, sat, l) {
   return '#' + [f(0), f(8), f(4)].map((v) => Math.round(v * 255).toString(16).padStart(2, '0')).join('');
 }
 
+// Slow drift into outer space: from SPACE_START the palette moves from candy pink to deep
+// space over SPACE_DAYS days (smoothstep), so the grid fades into it instead of jumping.
+const SPACE_START = Number(process.env.SPACE_START || 10);
+const SPACE_DAYS = Number(process.env.SPACE_DAYS || 14);
+function spaceMix(day) {
+  const x = Math.max(0, Math.min(1, ((day || 0) - SPACE_START) / SPACE_DAYS));
+  return x * x * (3 - 2 * x);
+}
+function mixHex(a, b, t) {
+  const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+  const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+  return '#' + pa.map((v, i) => Math.round(v + (pb[i] - v) * t).toString(16).padStart(2, '0')).join('');
+}
+
+// Star field: fixed per seed, each star twinkles on its own whole-cycle rhythm.
+function stars(seed, p, amount, count = 70) {
+  if (amount <= 0.01) return '';
+  const r = rng(seed + 501);
+  let out = '';
+  for (let i = 0; i < count; i++) {
+    const x = r() * W;
+    const y = r() * H;
+    const size = 1.2 + r() * r() * 3.6;
+    const tw = 0.55 + 0.45 * Math.sin(TAU * (p * (1 + (i % 3)) * K + r()));
+    const color = i % 7 === 0 ? '#ffd6f5' : i % 5 === 0 ? '#bfe8ff' : '#ffffff';
+    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${size.toFixed(2)}" fill="${color}" opacity="${(amount * tw).toFixed(2)}"/>`;
+  }
+  return out;
+}
+
+// A small ringed planet that fades in with the space look.
+function planet(x, y, rad, amount, tilt = -18) {
+  if (amount <= 0.05) return '';
+  return `<g opacity="${amount.toFixed(2)}" transform="translate(${x} ${y}) rotate(${tilt})">
+    <defs><radialGradient id="planetGrad" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffd0f0"/><stop offset="0.55" stop-color="#b06cff"/><stop offset="1" stop-color="#3a1a8a"/></radialGradient></defs>
+    <ellipse rx="${rad * 2}" ry="${rad * 0.5}" fill="none" stroke="#bfe8ff" stroke-width="${rad * 0.12}" opacity="0.55"/>
+    <circle r="${rad}" fill="url(#planetGrad)"/>
+    <path d="M ${-rad * 2} 0 A ${rad * 2} ${rad * 0.5} 0 0 0 ${rad * 2} 0" fill="none" stroke="#bfe8ff" stroke-width="${rad * 0.12}" opacity="0.8"/>
+  </g>`;
+}
+
 // Day colour drifts dawn pink -> night violet and back over 60 days; within the loop it breathes ±5°.
 function driftColors(day, p) {
   const phase = ((day - 1) % 60) / 30;
@@ -209,12 +257,16 @@ function coverScene(day) {
     heart: [g(100, 820), g(150, 450), 104, r()],
     glowX: g(100, 880),
     glowY: g(300, 700),
+    planetX: g(130, 820),
+    planetY: g(560, 260),
   };
 }
 
 function coverSvg(day, p = 0, scene = coverScene(day)) {
   glowId = 0;
-  const c = driftColors(day, p);
+  const c0 = driftColors(day, p);
+  const sp = spaceMix(day);
+  const c = { ...c0, top: mixHex(c0.top, '#1b1650', sp), bottom: mixHex(c0.bottom, '#060518', sp) };
   const dayStr = String(day).padStart(3, '0');
   const big = floating(scene.big, p);
   const orbit = (x, y, rad, ph) => [x + rad * slow(p, 2, ph), y + rad * slow(p, 2, ph + 0.25)];
@@ -227,9 +279,11 @@ function coverSvg(day, p = 0, scene = coverScene(day)) {
     <linearGradient id="bg" x1="${(0.3 + 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y1="0" x2="${(0.7 - 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y2="1"><stop offset="0" stop-color="${c.top}"/><stop offset="1" stop-color="${c.bottom}"/></linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
-  ${glow('#8ff0ff', g1x, g1y, 520, 0.55)}
-  ${glow('#ff8ad8', g2x, g2y, 460, 0.6)}
-  ${glow('#ffd6aa', g3x, g3y, 360, Math.max(0.08, 0.38 - c.t * 0.28))}
+  ${glow(mixHex('#8ff0ff', '#3f8cff', sp), g1x, g1y, 520, 0.55 - 0.15 * sp)}
+  ${glow(mixHex('#ff8ad8', '#a24cff', sp), g2x, g2y, 460, 0.6 - 0.12 * sp)}
+  ${glow(mixHex('#ffd6aa', '#ff5fb8', sp), g3x, g3y, 360, Math.max(0.08, 0.38 - c.t * 0.28) * (1 - sp) + 0.28 * sp)}
+  ${stars(day, p, sp)}
+  ${planet(scene.planetX, scene.planetY, 46, sp)}
   ${risers(day, p, 5)}
   ${shadow(big.x + 20, scene.big.y + scene.big.r + 70, scene.big.r * 0.75 * (1 - 0.06 * bob(scene.big, p)), 34)}
   ${big.svg}
@@ -260,7 +314,16 @@ function trackScene(track) {
 
 function trackSvg(track, p = 0, scene = trackScene(track)) {
   glowId = 0;
-  const st = PLAYLIST_STYLE[track.playlist];
+  const st0 = PLAYLIST_STYLE[track.playlist];
+  const sp = spaceMix(track.day);
+  const space = SPACE_STYLE[track.playlist];
+  const st = {
+    ...st0,
+    blobs: st0.blobs.map(([col, x, y, rad, op], i) => [mixHex(col, space.blobs[i], sp), x, y, rad, op * (1 - 0.25 * sp)]),
+    // Dark-on-light labels switch to the light sticker style once the background turns dark.
+    labelTop: sp >= 0.5 ? undefined : st0.labelTop,
+    labelLayers: sp >= 0.5 ? undefined : st0.labelLayers,
+  };
   const t = fit(track.title, 860, 70, 44, 0.56);
   const a = fit(track.artist, 860, 48, 34, 0.52);
   const art = floating(scene.art, p, { art: true });
@@ -268,8 +331,8 @@ function trackSvg(track, p = 0, scene = trackScene(track)) {
   const shift = 4 * slow(p, 1, 0);
   const [s0, s1] = st.stops;
   const bg = `<linearGradient id="slideBg" x1="0" y1="0" x2="${st.vertical ? 0 : 1}" y2="1">
-    <stop offset="0" stop-color="${hsl(s0[0] + shift, s0[1], s0[2])}"/>
-    <stop offset="1" stop-color="${hsl(s1[0] + shift, s1[1], s1[2])}"/></linearGradient>`;
+    <stop offset="0" stop-color="${mixHex(hsl(s0[0] + shift, s0[1], s0[2]), space.stops[0], sp)}"/>
+    <stop offset="1" stop-color="${mixHex(hsl(s1[0] + shift, s1[1], s1[2]), space.stops[1], sp)}"/></linearGradient>`;
   const image = track.coverDataUri
     ? `<image href="${track.coverDataUri}" x="${(art.x - R).toFixed(1)}" y="${(art.y - R).toFixed(1)}" width="${R * 2}" height="${R * 2}" preserveAspectRatio="xMidYMid slice" clip-path="url(#artClip)"/>`
     : `<circle cx="${art.x.toFixed(1)}" cy="${art.y.toFixed(1)}" r="${R - 26}" fill="#ffffff" opacity="0.25"/>`;
@@ -279,6 +342,7 @@ function trackSvg(track, p = 0, scene = trackScene(track)) {
   </defs>
   <rect width="${W}" height="${H}" fill="url(#slideBg)"/>
   ${st.blobs.map(([col, x, y, rad, op], i) => glow(col, x + 50 * slow(p, 2, i * 0.37), y + 50 * slow(p, 2, i * 0.37 + 0.25), rad, op)).join('')}
+  ${stars(track.index * 97 + (track.day || 0), p, sp, 55)}
   ${risers(track.index * 13 + 5, p, 4)}
   ${shadow(art.x, scene.art.y + R + 40, R * 0.7 * (1 - 0.05 * bob(scene.art, p)), 40)}
   ${image}
@@ -352,7 +416,7 @@ function toVideo(svgAt) {
 async function renderPost(day, tracks, { animate = true } = {}) {
   const scenes = [{ at: (p, s) => coverSvg(day, p, s), scene: coverScene(day) }];
   tracks.forEach((t, i) => {
-    const track = { ...t, index: i + 1 };
+    const track = { ...t, index: i + 1, day };
     scenes.push({ at: (p, s) => trackSvg(track, p, s), scene: trackScene(track) });
   });
   const out = [];

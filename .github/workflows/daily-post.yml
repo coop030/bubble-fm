@@ -39,6 +39,8 @@ jobs:
       MODE: ${{ inputs.mode || vars.SCHEDULED_MODE || 'preview' }}
       ANIMATE: ${{ vars.ANIMATE || 'true' }}
       VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS || '30' }}
+      SPACE_START: ${{ vars.SPACE_START || '10' }}
+      SPACE_DAYS: ${{ vars.SPACE_DAYS || '14' }}
       # A preview always renders fresh, even if today's post already exists.
       FORCE: ${{ (inputs.mode || vars.SCHEDULED_MODE || 'preview') == 'preview' && 'true' || 'false' }}
     steps:
