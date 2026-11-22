@@ -1,27 +1,27 @@
 {
-  "date": "2026-11-21",
-  "day": 10,
+  "date": "2026-11-22",
+  "day": 11,
   "tracks": [
     {
       "playlist": "breakfast",
-      "title": "Palisades",
-      "artist": "Lords of Lounge",
-      "url": "https://open.spotify.com/track/50tmrlcBfHrPp2ogy182wI",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27364a44e5549cf8599e32ff033"
+      "title": "Opstigning",
+      "artist": "Bremer/McCoy",
+      "url": "https://open.spotify.com/track/2GEsMmaLMqIA0trCyrAeoa",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273558d52de25d11d2589bc60d8"
     },
     {
       "playlist": "datenight",
-      "title": "Tripping Out",
-      "artist": "Curtis Mayfield",
-      "url": "https://open.spotify.com/track/0mIpT5VijWPv4b9s0K76qA",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273410ad92537aec07ab1bf1da7"
+      "title": "Playing Your Game, Baby",
+      "artist": "Barry White",
+      "url": "https://open.spotify.com/track/6dwMebV6lVtwFiecdb8aSD",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273556d625eda94d0a7d4b38abc"
     },
     {
       "playlist": "boogie",
-      "title": "Radiant Shift",
-      "artist": "Jump Source, Priori, Patrick Holland",
-      "url": "https://open.spotify.com/track/41LflMrHRumXjTMgmT8ATy",
-      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2732b4b2bcf4c731d088d5d906c"
+      "title": "Karmadog",
+      "artist": "LOYOTO",
+      "url": "https://open.spotify.com/track/0vuQbxuPIXmabBeDCiMHDQ",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2739f86cd6aaa9036dbb8bbdffe"
     }
   ]
 }

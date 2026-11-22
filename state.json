@@ -1,5 +1,5 @@
 {
-  "day": 10,
+  "day": 11,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
@@ -11,7 +11,8 @@
       "54X1QKPrLE3FgsKmJqit5H",
       "6CSQGGObzhr6rRmYsatoSq",
       "64A1s4UbNdMlYSeyKnx8x9",
-      "50tmrlcBfHrPp2ogy182wI"
+      "50tmrlcBfHrPp2ogy182wI",
+      "2GEsMmaLMqIA0trCyrAeoa"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
@@ -23,7 +24,8 @@
       "490cYZOtzZChJYSwZogKFo",
       "7uM0hFVKbIwqlBj0fnqDFO",
       "7nnE9yOGuPhPtFMnhm6gRu",
-      "41LflMrHRumXjTMgmT8ATy"
+      "41LflMrHRumXjTMgmT8ATy",
+      "0vuQbxuPIXmabBeDCiMHDQ"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
@@ -35,7 +37,8 @@
       "3sXAAkkejrZAs57QHjnuZf",
       "0TdPo2fSEvO7k3XOYQyjU6",
       "0PYC777EjWywXUnojj0SEB",
-      "0mIpT5VijWPv4b9s0K76qA"
+      "0mIpT5VijWPv4b9s0K76qA",
+      "6dwMebV6lVtwFiecdb8aSD"
     ]
   },
   "postedKeys": [
@@ -68,7 +71,10 @@
     "malin genie|come the morning",
     "lords of lounge|palisades",
     "curtis mayfield|tripping out",
-    "jump source|radiant shift"
+    "jump source|radiant shift",
+    "bremer mccoy|opstigning",
+    "barry white|playing your game baby",
+    "loyoto|karmadog"
   ],
   "history": [
     {
@@ -169,6 +175,16 @@
         "Lords of Lounge – Palisades",
         "Curtis Mayfield – Tripping Out",
         "Jump Source, Priori, Patrick Holland – Radiant Shift"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "day": 11,
+      "instagramId": "17915367135592927",
+      "tracks": [
+        "Bremer/McCoy – Opstigning",
+        "Barry White – Playing Your Game, Baby",
+        "LOYOTO – Karmadog"
       ]
     }
   ]

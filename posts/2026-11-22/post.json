@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-22",
+  "day": 11,
+  "published": true,
+  "tracks": [
+    {
+      "id": "2GEsMmaLMqIA0trCyrAeoa",
+      "title": "Opstigning",
+      "artist": "Bremer/McCoy",
+      "url": "https://open.spotify.com/track/2GEsMmaLMqIA0trCyrAeoa",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273558d52de25d11d2589bc60d8",
+      "playlist": "breakfast",
+      "instagram": []
+    },
+    {
+      "id": "6dwMebV6lVtwFiecdb8aSD",
+      "title": "Playing Your Game, Baby",
+      "artist": "Barry White",
+      "url": "https://open.spotify.com/track/6dwMebV6lVtwFiecdb8aSD",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273556d625eda94d0a7d4b38abc",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "0vuQbxuPIXmabBeDCiMHDQ",
+      "title": "Karmadog",
+      "artist": "LOYOTO",
+      "url": "https://open.spotify.com/track/0vuQbxuPIXmabBeDCiMHDQ",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2739f86cd6aaa9036dbb8bbdffe",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": "17915367135592927"
+}

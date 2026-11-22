@@ -1,0 +1,69 @@
+{
+  "breakfast": [
+    {
+      "artist": "Astrocolor",
+      "title": "Cosmosis",
+      "handlesMissing": [
+        "Astrocolor"
+      ]
+    },
+    {
+      "artist": "Jake Xerxes Fussell",
+      "title": "16–20",
+      "handlesMissing": [
+        "Jake Xerxes Fussell"
+      ]
+    },
+    {
+      "artist": "Five and Tens",
+      "title": "Life Happens to Us All",
+      "handlesMissing": []
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "mei anima",
+      "title": "Highway",
+      "handlesMissing": [
+        "mei anima"
+      ]
+    },
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Ride or Die",
+      "handlesMissing": []
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "Frank & Tony, DJ Sprinkles",
+      "title": "Companion",
+      "handlesMissing": [
+        "Frank & Tony",
+        "DJ Sprinkles"
+      ]
+    },
+    {
+      "artist": "Mood II Swing",
+      "title": "Sunlight In My Eyes",
+      "handlesMissing": [
+        "Mood II Swing"
+      ]
+    },
+    {
+      "artist": "Akabu, Jimpster",
+      "title": "Searchin - Jimpster Mix",
+      "handlesMissing": [
+        "Akabu",
+        "Jimpster"
+      ]
+    },
+    {
+      "artist": "Silat Beksi",
+      "title": "Steezy",
+      "handlesMissing": [
+        "Silat Beksi"
+      ]
+    }
+  ]
+}
