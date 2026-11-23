@@ -1,5 +1,5 @@
 {
-  "day": 11,
+  "day": 12,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
@@ -12,7 +12,8 @@
       "6CSQGGObzhr6rRmYsatoSq",
       "64A1s4UbNdMlYSeyKnx8x9",
       "50tmrlcBfHrPp2ogy182wI",
-      "2GEsMmaLMqIA0trCyrAeoa"
+      "2GEsMmaLMqIA0trCyrAeoa",
+      "6otzvpeIBUBy3WkUQDFkwO"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
@@ -25,7 +26,8 @@
       "7uM0hFVKbIwqlBj0fnqDFO",
       "7nnE9yOGuPhPtFMnhm6gRu",
       "41LflMrHRumXjTMgmT8ATy",
-      "0vuQbxuPIXmabBeDCiMHDQ"
+      "0vuQbxuPIXmabBeDCiMHDQ",
+      "5Nsfmt2BxPow9cOHumWOy6"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
@@ -38,7 +40,8 @@
       "0TdPo2fSEvO7k3XOYQyjU6",
       "0PYC777EjWywXUnojj0SEB",
       "0mIpT5VijWPv4b9s0K76qA",
-      "6dwMebV6lVtwFiecdb8aSD"
+      "6dwMebV6lVtwFiecdb8aSD",
+      "4KttPrziB8X5vtOr6rb3MK"
     ]
   },
   "postedKeys": [
@@ -74,7 +77,10 @@
     "jump source|radiant shift",
     "bremer mccoy|opstigning",
     "barry white|playing your game baby",
-    "loyoto|karmadog"
+    "loyoto|karmadog",
+    "astrocolor|cosmosis",
+    "mei anima|highway",
+    "frank|companion"
   ],
   "history": [
     {
@@ -185,6 +191,16 @@
         "Bremer/McCoy – Opstigning",
         "Barry White – Playing Your Game, Baby",
         "LOYOTO – Karmadog"
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "day": 12,
+      "instagramId": "18084430121380905",
+      "tracks": [
+        "Astrocolor – Cosmosis",
+        "mei anima – Highway",
+        "Frank & Tony, DJ Sprinkles – Companion"
       ]
     }
   ]

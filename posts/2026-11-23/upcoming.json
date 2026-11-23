@@ -1,0 +1,47 @@
+{
+  "breakfast": [
+    {
+      "artist": "Jake Xerxes Fussell",
+      "title": "16–20",
+      "handlesMissing": [
+        "Jake Xerxes Fussell"
+      ]
+    },
+    {
+      "artist": "Five and Tens",
+      "title": "Life Happens to Us All",
+      "handlesMissing": []
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "title": "Ride or Die",
+      "handlesMissing": []
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "Mood II Swing",
+      "title": "Sunlight In My Eyes",
+      "handlesMissing": [
+        "Mood II Swing"
+      ]
+    },
+    {
+      "artist": "Akabu, Jimpster",
+      "title": "Searchin - Jimpster Mix",
+      "handlesMissing": [
+        "Akabu",
+        "Jimpster"
+      ]
+    },
+    {
+      "artist": "Silat Beksi",
+      "title": "Steezy",
+      "handlesMissing": [
+        "Silat Beksi"
+      ]
+    }
+  ]
+}

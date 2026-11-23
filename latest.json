@@ -1,27 +1,27 @@
 {
-  "date": "2026-11-22",
-  "day": 11,
+  "date": "2026-11-23",
+  "day": 12,
   "tracks": [
     {
       "playlist": "breakfast",
-      "title": "Opstigning",
-      "artist": "Bremer/McCoy",
-      "url": "https://open.spotify.com/track/2GEsMmaLMqIA0trCyrAeoa",
-      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273558d52de25d11d2589bc60d8"
+      "title": "Cosmosis",
+      "artist": "Astrocolor",
+      "url": "https://open.spotify.com/track/6otzvpeIBUBy3WkUQDFkwO",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2738077a8c68cae4e75c9aa7cac"
     },
     {
       "playlist": "datenight",
-      "title": "Playing Your Game, Baby",
-      "artist": "Barry White",
-      "url": "https://open.spotify.com/track/6dwMebV6lVtwFiecdb8aSD",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273556d625eda94d0a7d4b38abc"
+      "title": "Highway",
+      "artist": "mei anima",
+      "url": "https://open.spotify.com/track/4KttPrziB8X5vtOr6rb3MK",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27363d8a367ed510b472e602507"
     },
     {
       "playlist": "boogie",
-      "title": "Karmadog",
-      "artist": "LOYOTO",
-      "url": "https://open.spotify.com/track/0vuQbxuPIXmabBeDCiMHDQ",
-      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2739f86cd6aaa9036dbb8bbdffe"
+      "title": "Companion",
+      "artist": "Frank & Tony, DJ Sprinkles",
+      "url": "https://open.spotify.com/track/5Nsfmt2BxPow9cOHumWOy6",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273ef4e25648333e7ab94865a57"
     }
   ]
 }

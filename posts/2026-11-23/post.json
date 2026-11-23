@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-23",
+  "day": 12,
+  "published": true,
+  "tracks": [
+    {
+      "id": "6otzvpeIBUBy3WkUQDFkwO",
+      "title": "Cosmosis",
+      "artist": "Astrocolor",
+      "url": "https://open.spotify.com/track/6otzvpeIBUBy3WkUQDFkwO",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2738077a8c68cae4e75c9aa7cac",
+      "playlist": "breakfast",
+      "instagram": []
+    },
+    {
+      "id": "4KttPrziB8X5vtOr6rb3MK",
+      "title": "Highway",
+      "artist": "mei anima",
+      "url": "https://open.spotify.com/track/4KttPrziB8X5vtOr6rb3MK",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b27363d8a367ed510b472e602507",
+      "playlist": "datenight",
+      "instagram": []
+    },
+    {
+      "id": "5Nsfmt2BxPow9cOHumWOy6",
+      "title": "Companion",
+      "artist": "Frank & Tony, DJ Sprinkles",
+      "url": "https://open.spotify.com/track/5Nsfmt2BxPow9cOHumWOy6",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273ef4e25648333e7ab94865a57",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ],
+  "instagramId": "18084430121380905"
+}
