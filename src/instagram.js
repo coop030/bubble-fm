@@ -98,4 +98,28 @@ async function searchAudio({ userId, token, query, type = 'music' }) {
   }));
 }
 
-module.exports = { searchAudio, publishCarousel, refreshToken };
+// One Reel, shared to the feed too. Tags artists; can attach a track from Instagram's music library.
+async function publishReel({ userId, token, videoUrl, coverUrl, caption, tags = [], audioId }) {
+  const base = { media_type: 'REELS', video_url: videoUrl, caption, share_to_feed: 'true', access_token: token };
+  if (coverUrl) base.cover_url = coverUrl;
+  if (audioId) base.audio_configuration = JSON.stringify({ audio_id: audioId, audio_volume: 1, video_volume: 0 });
+  const attempts = [];
+  if (tags.length) attempts.push({ ...base, user_tags: JSON.stringify(tags.map((username) => ({ username }))) });
+  attempts.push(base);
+  let id;
+  for (const params of attempts) {
+    try {
+      ({ id } = await call('POST', `${userId}/media`, params));
+      if (params.user_tags) console.log(`Tagged ${tags.map((t) => '@' + t).join(', ')}.`);
+      break;
+    } catch (err) {
+      if (params === base) throw err;
+      console.log(`Could not tag ${tags.join(', ')}: ${err.message}. Posting without the tag.`);
+    }
+  }
+  await waitUntilReady(id, token);
+  const { id: postId } = await call('POST', `${userId}/media_publish`, { creation_id: id, access_token: token });
+  return postId;
+}
+
+module.exports = { searchAudio, publishCarousel, publishReel, refreshToken };

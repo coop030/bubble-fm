@@ -133,16 +133,16 @@ function floating(b, p, extra) {
 }
 
 // Small bubbles that rise through the frame and wrap around.
-function risers(seed, p, count) {
+function risers(seed, p, count, w = W, h = H) {
   const r = rng(seed + 99);
   let out = '';
   for (let i = 0; i < count; i++) {
-    const x0 = 60 + r() * (W - 120);
+    const x0 = 60 + r() * (w - 120);
     const size = 10 + r() * 18;
     const start = r();
-    const span = H + 120;
+    const span = h + 120;
     const passes = K + (i % 2);
-    const y = H + 60 - (((start + p * passes) % 1) * span);
+    const y = h + 60 - (((start + p * passes) % 1) * span);
     const x = x0 + 18 * wave(p, 2, r());
     out += bubble(x, y, size);
   }
@@ -204,13 +204,13 @@ function mixHex(a, b, t) {
 }
 
 // Star field: fixed per seed, each star twinkles on its own whole-cycle rhythm.
-function stars(seed, p, amount, count = 70) {
+function stars(seed, p, amount, count = 70, w = W, h = H) {
   if (amount <= 0.01) return '';
   const r = rng(seed + 501);
   let out = '';
   for (let i = 0; i < count; i++) {
-    const x = r() * W;
-    const y = r() * H;
+    const x = r() * w;
+    const y = r() * h;
     const size = 1.2 + r() * r() * 3.6;
     const tw = 0.55 + 0.45 * Math.sin(TAU * (p * (1 + (i % 3)) * K + r()));
     const color = i % 7 === 0 ? '#ffd6f5' : i % 5 === 0 ? '#bfe8ff' : '#ffffff';
@@ -362,15 +362,15 @@ function trackSvg(track, p = 0, scene = trackScene(track)) {
 </svg>`;
 }
 
-function rasterize(svg) {
+function rasterize(svg, w = W) {
   return new Resvg(svg, {
-    fitTo: { mode: 'width', value: W },
+    fitTo: { mode: 'width', value: w },
     font: { fontFiles: FONTS, loadSystemFonts: false, defaultFontFamily: 'Fredoka' },
   }).render();
 }
 
-async function toJpeg(svg) {
-  const img = rasterize(svg);
+async function toJpeg(svg, w = W) {
+  const img = rasterize(svg, w);
   return sharp(Buffer.from(img.pixels), { raw: { width: img.width, height: img.height, channels: 4 } })
     .flatten()
     .jpeg({ quality: 92, chromaSubsampling: '4:4:4' })
@@ -378,13 +378,13 @@ async function toJpeg(svg) {
 }
 
 // Streams raw frames into ffmpeg and returns the MP4 as a buffer.
-function toVideo(svgAt) {
+function toVideo(svgAt, w = W, h = H) {
   const tmp = path.join(os.tmpdir(), `bubblefm-${process.pid}-${Date.now()}.mp4`);
   return new Promise((resolve, reject) => {
     const frames = FPS * SECONDS;
     const ff = spawn(ffmpegPath, [
       '-hide_banner', '-loglevel', 'error', '-y',
-      '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS), '-i', '-',
+      '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${w}x${h}`, '-r', String(FPS), '-i', '-',
       '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo',
       '-map', '0:v', '-map', '1:a', '-shortest',
       '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-pix_fmt', 'yuv420p',
@@ -404,7 +404,7 @@ function toVideo(svgAt) {
     });
     (async () => {
       for (let i = 0; i < frames; i++) {
-        const img = rasterize(svgAt(i / frames));
+        const img = rasterize(svgAt(i / frames), w);
         if (!ff.stdin.write(Buffer.from(img.pixels))) await new Promise((r) => ff.stdin.once('drain', r));
       }
       ff.stdin.end();
@@ -428,4 +428,8 @@ async function renderPost(day, tracks, { animate = true } = {}) {
   return out;
 }
 
-module.exports = { renderPost, coverSvg, trackSvg, W, H, DEFS, HEART, SPARK, bubble, stickerText, icon, glow, FONTS };
+module.exports = {
+  // Shared with the Reel renderer.
+  PLAYLIST_STYLE, SPACE_STYLE, TAU, K, esc, rng, wave, slow, bob, shadow, floating, risers, twinkle, fit, hsl,
+  spaceMix, mixHex, stars, planet, toJpeg, toVideo, resetGlow: () => { glowId = 0; },
+  renderPost, coverSvg, trackSvg, W, H, DEFS, HEART, SPARK, bubble, stickerText, icon, glow, FONTS };

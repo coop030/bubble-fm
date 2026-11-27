@@ -11,6 +11,10 @@ on:
         type: choice
         options: [preview, manual, post]
         default: preview
+      audio_id:
+        description: 'Optional: Instagram music ID to put under the Reel'
+        type: string
+        default: ''
       sample:
         description: 'Use sample tracks instead of Spotify'
         type: boolean
@@ -38,7 +42,9 @@ jobs:
       SAMPLE: ${{ inputs.sample && 'true' || 'false' }}
       MODE: ${{ inputs.mode || vars.SCHEDULED_MODE || 'preview' }}
       ANIMATE: ${{ vars.ANIMATE || 'true' }}
-      VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS || '30' }}
+      FORMAT: ${{ vars.FORMAT || 'reel' }}
+      VIDEO_SECONDS: ${{ vars.VIDEO_SECONDS || (vars.FORMAT == 'carousel' && '30' || '15') }}
+      REEL_AUDIO_ID: ${{ inputs.audio_id }}
       SPACE_START: ${{ vars.SPACE_START || '10' }}
       SPACE_DAYS: ${{ vars.SPACE_DAYS || '14' }}
       # A preview always renders fresh, even if today's post already exists.

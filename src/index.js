@@ -1,10 +1,13 @@
 // Bubble FM daily post.
 //   node src/index.js prepare   pick the next track on each playlist and render the carousel
 //   node src/index.js publish   post the prepared carousel to Instagram and record it
+// FORMAT=reel (the default) posts one track a day as a Reel, taking the playlists in turn.
+// FORMAT=carousel posts the old three-track carousel.
 // Set SAMPLE=true to try the templates without Spotify.
 const fs = require('fs');
 const path = require('path');
 const { renderPost } = require('./render');
+const { renderReel } = require('./reel');
 const spotify = require('./spotify');
 const instagram = require('./instagram');
 const { sampleTracks } = require('./sample');
@@ -84,15 +87,35 @@ function playlistLink(p) {
   return links[p];
 }
 
-async function pickTracks(state) {
-  if (process.env.SAMPLE === 'true') return sampleTracks();
+const FORMAT = () => (process.env.FORMAT || 'reel').toLowerCase();
+
+function buildReelCaption(day, t) {
+  return [
+    `day ${String(day).padStart(3, '0')} | ${LABEL[t.playlist]}`,
+    `${t.artist} – ${t.title}`,
+    '',
+    `In the ${LABEL[t.playlist]} playlist, link in bio.`,
+    '',
+    '#bubblefm #musictofallinloveto',
+  ].join('\n');
+}
+
+// The playlist whose turn it is: breakfast, date night, boogie, then round again.
+function nextPlaylist(state) {
+  const last = [...(state.history || [])].reverse().find((h) => h.format === 'reel');
+  if (!last) return PLAYLISTS[0];
+  return PLAYLISTS[(PLAYLISTS.indexOf(last.playlist) + 1) % PLAYLISTS.length];
+}
+
+async function pickTracks(state, playlists = PLAYLISTS) {
+  if (process.env.SAMPLE === 'true') return sampleTracks().filter((t) => playlists.includes(t.playlist));
   const hasKeys = process.env.SPOTIFY_CLIENT_ID && process.env.SPOTIFY_CLIENT_SECRET;
   const token = hasKeys ? await spotify.getToken(env('SPOTIFY_CLIENT_ID'), env('SPOTIFY_CLIENT_SECRET')) : null;
   if (!hasKeys) console.log('No Spotify keys set, reading the public playlist pages instead.');
   const { ids, keys } = postedBefore(state);
   const picked = [];
   const remaining = {};
-  for (const p of PLAYLISTS) {
+  for (const p of playlists) {
     const all = token
       ? await spotify.getPlaylistTracks(token, playlistLink(p))
       : await spotify.getPublicPlaylistTracks(playlistLink(p));
@@ -154,6 +177,7 @@ async function prepare() {
     return;
   }
   const day = state.day + 1;
+  if (FORMAT() === 'reel') return prepareReel(state, day, date, dir);
   const tracks = await pickTracks(state);
   const animate = process.env.ANIMATE !== 'false';
   const slides = await renderPost(day, tracks, { animate });
@@ -194,6 +218,37 @@ async function prepare() {
   console.log(`Prepared day ${day} in posts/${date}:\n\n${caption}`);
 }
 
+async function prepareReel(state, day, date, dir) {
+  // Take the playlist whose turn it is; if it has run dry, move on to the next one with songs.
+  const start = PLAYLISTS.indexOf(nextPlaylist(state));
+  let track = null;
+  let upcoming = null;
+  for (let i = 0; i < PLAYLISTS.length && !track; i++) {
+    const p = PLAYLISTS[(start + i) % PLAYLISTS.length];
+    try {
+      const picked = await pickTracks(state, [p]);
+      track = picked[0];
+      upcoming = picked.upcoming;
+    } catch (err) {
+      console.log(err.message + ' Moving on to the next playlist.');
+    }
+  }
+  if (!track) throw new Error('No playlist has songs left that were never posted before. Add new songs.');
+  const { still, video } = await renderReel({ ...track, day }, { animate: process.env.ANIMATE !== 'false' });
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'cover.jpg'), still);
+  if (video) fs.writeFileSync(path.join(dir, 'reel.mp4'), video);
+  const caption = buildReelCaption(day, track);
+  fs.writeFileSync(path.join(dir, 'caption.txt'), caption + '\n');
+  const { coverDataUri, ...t } = track;
+  const { found, missing } = handlesFor(t, loadHandles());
+  if (missing.length) console.log(`No Instagram handle yet for: ${missing.join(', ')}. Add them to artists.json to tag them.`);
+  if (upcoming) fs.writeFileSync(path.join(dir, 'upcoming.json'), JSON.stringify(upcoming, null, 2) + '\n');
+  const meta = { date, day, format: 'reel', published: false, tracks: [{ ...t, instagram: found }], files: ['reel.mp4'], cover: 'cover.jpg' };
+  fs.writeFileSync(path.join(dir, 'post.json'), JSON.stringify(meta, null, 2) + '\n');
+  console.log(`Prepared day ${day} (Reel, ${LABEL[track.playlist]}) in posts/${date}:\n\n${caption}`);
+}
+
 async function publish() {
   const date = today();
   const dir = path.join(POSTS_DIR, date);
@@ -215,7 +270,18 @@ async function publish() {
       tags: i === 0 ? [] : (meta.tracks[i - 1]?.instagram || []),
     }));
     const caption = fs.readFileSync(path.join(dir, 'caption.txt'), 'utf8').trim();
-    postId = await instagram.publishCarousel({
+    if (meta.format === 'reel') {
+      const base = `https://raw.githubusercontent.com/${repo}/${sha}/posts/${date}/`;
+      postId = await instagram.publishReel({
+        userId: process.env.IG_USER_ID || '17841460524384737', // @bubblefm030
+        token: env('IG_ACCESS_TOKEN'),
+        videoUrl: base + meta.files[0],
+        coverUrl: meta.cover ? base + meta.cover : undefined,
+        caption,
+        tags: meta.tracks[0]?.instagram || [],
+        audioId: process.env.REEL_AUDIO_ID || meta.audioId,
+      });
+    } else postId = await instagram.publishCarousel({
       userId: process.env.IG_USER_ID || '17841460524384737', // @bubblefm030
       token: env('IG_ACCESS_TOKEN'),
       items,
@@ -230,7 +296,7 @@ async function publish() {
     (state.posted[t.playlist] ||= []).push(t.id);
     (state.postedKeys ||= []).push(songKey(t.artist, t.title));
   }
-  state.history.push({ date, day: meta.day, instagramId: postId, tracks: meta.tracks.map((t) => `${t.artist} – ${t.title}`) });
+  state.history.push({ date, day: meta.day, instagramId: postId, ...(meta.format === 'reel' ? { format: 'reel', playlist: meta.tracks[0].playlist } : {}), tracks: meta.tracks.map((t) => `${t.artist} – ${t.title}`) });
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + '\n');
   // The link page shows these as "today's three".
   const latest = { date, day: meta.day, tracks: meta.tracks.map(({ playlist, title, artist, url, coverUrl }) => ({ playlist, title, artist, url, coverUrl })) };
