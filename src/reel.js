@@ -139,8 +139,8 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
 
 // Reel cover for the profile grid: the same day cover as before, so the grid carries on.
 // The grid shows the middle 3:4 (1080x1440 from y 240); the cover fills that, the rest continues its gradient.
-function gridCoverSvg(day) {
-  const inner = R.coverSvg(day, 0).replace('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">',
+function gridCoverSvg(day, playlist) {
+  const inner = R.coverSvg(day, 0, undefined, { label: playlist && R.PLAYLIST_STYLE[playlist].label }).replace('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">',
     '<svg x="-36" y="240" width="1152" height="1440" viewBox="0 0 1080 1350" preserveAspectRatio="none" overflow="visible">')
     // Stretch the cover's own background over the whole 9:16 so there is no seam above and below.
     .replace('<rect width="1080" height="1350" fill="url(#bg)"/>', '<rect x="-40" y="-230" width="1160" height="1810" fill="url(#bg)"/>');
@@ -157,7 +157,7 @@ function gridCoverSvg(day) {
 // Returns { still (grid cover), frame (first video frame), video } for the day's track.
 async function renderReel(track, { animate = true } = {}) {
   const scene = reelScene(track);
-  const still = await R.toJpeg(gridCoverSvg(track.day), RW);
+  const still = await R.toJpeg(gridCoverSvg(track.day, track.playlist), RW);
   const video = animate ? await R.toVideo((p) => reelSvg(track, p, scene), RW, RH) : null;
   return { still, video };
 }
