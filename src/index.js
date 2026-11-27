@@ -254,6 +254,21 @@ async function refresh() {
 // Lists what Instagram's licensed music search finds, to check a song before posting.
 async function audio() {
   const queries = process.argv.slice(3).join(' ').split('|').map((q) => q.trim()).filter(Boolean);
+  if (process.env.AUDIO_RAW === 'true') {
+    for (const type of ['music', 'original_sound']) {
+      for (const q of ['', queries[0] || 'love']) {
+        const url = new URL(`https://graph.facebook.com/${process.env.IG_GRAPH_VERSION || 'v23.0'}/ig_audio`);
+        url.searchParams.set('audio_type', type);
+        url.searchParams.set('user_id', process.env.IG_USER_ID || '17841460524384737');
+        if (q) url.searchParams.set('search_query', q);
+        url.searchParams.set('access_token', env('IG_ACCESS_TOKEN'));
+        const res = await fetch(url);
+        const text = (await res.text()).replace(/"download_url":"[^"]*"/g, '"download_url":"…"').replace(/"(cover_artwork_thumbnail_ur[il])":"[^"]*"/g, '"$1":"…"');
+        console.log(`\nRAW ${type} "${q}": ${res.status} ${text.slice(0, 700)}`);
+      }
+    }
+    return;
+  }
   for (const query of queries.length ? queries : ['']) {
     try {
       const found = await instagram.searchAudio({

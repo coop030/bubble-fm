@@ -8,6 +8,10 @@ on:
         description: 'Songs to look up, separated by |'
         required: false
         default: ''
+      raw:
+        description: 'Show the raw answer from Instagram'
+        type: boolean
+        default: false
 
 jobs:
   check:
@@ -24,4 +28,5 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           QUERIES: ${{ inputs.queries }}
+          AUDIO_RAW: ${{ inputs.raw && 'true' || 'false' }}
         run: node src/index.js audio "$QUERIES"
