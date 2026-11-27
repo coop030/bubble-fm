@@ -238,6 +238,9 @@ async function prepareReel(state, day, date, dir) {
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'cover.jpg'), still);
   if (video) fs.writeFileSync(path.join(dir, 'reel.mp4'), video);
+  // Keep the album art too (handy for concepts and Stories).
+  const m = /^data:image\/\w+;base64,(.+)$/.exec(track.coverDataUri || '');
+  if (m) fs.writeFileSync(path.join(dir, 'art.jpg'), Buffer.from(m[1], 'base64'));
   const caption = buildReelCaption(day, track);
   fs.writeFileSync(path.join(dir, 'caption.txt'), caption + '\n');
   const { coverDataUri, ...t } = track;
