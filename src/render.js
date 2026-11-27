@@ -295,7 +295,7 @@ function coverSvg(day, p = 0, scene = coverScene(day), { label } = {}) {
   <rect x="64" y="78" width="330" height="92" rx="46" fill="#ff7fc8"/>
   <rect x="64" y="64" width="330" height="92" rx="46" fill="#ffffff" opacity="0.92"/>
   <text x="229" y="128" text-anchor="middle" font-family="Bagel Fat One" font-size="48" fill="#5a1a9c">bubble fm</text>
-  ${stickerText(label ? `day | ${label}` : 'day', 72, 990, 52, { family: 'Fredoka', weight: 700, layers: ['#b0309a'], step: 5 })}
+  ${stickerText(label || 'day', 72, 990, 52, { family: 'Fredoka', weight: 700, layers: ['#b0309a'], step: 5 })}
   ${stickerText(dayStr, 64, 1200, 230, { step: 11 })}
   ${stickerText('music to fall in love to', 72, 1282, 46, { family: 'Fredoka', weight: 700, layers: ['#5a1a9c'], step: 4 })}
 </svg>`;
