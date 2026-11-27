@@ -10,7 +10,7 @@ const { TAU, K, wave, slow, esc, rng, DEFS, HEART, SPARK, icon, glow, bubble, st
 function reelScene(track) {
   const r = rng(track.title.length * 31 + (track.day || 0));
   return {
-    art: { x: 540, y: 880, r: 350, sway: 10, bob: 20, cx: 1, cy: 1, ph: r() },
+    art: { x: 540, y: 900, r: 320, sway: 10, bob: 20, cx: 1, cy: 1, ph: r() },
     orbit: [0, 1, 2].map((i) => ({ size: [54, 34, 24][i], start: r() + i / 3, rx: 470 - i * 30, ry: 140 + i * 30, dir: i === 1 ? -1 : 1 })),
     a: { x: 900 - r() * 60, y: 560 + r() * 60, r: 64, sway: 16, bob: 24, cx: 1, cy: 2, ph: r() },
     b: { x: 150 + r() * 40, y: 1360 + r() * 30, r: 40, sway: 12, bob: 18, cx: 2, cy: 1, ph: r() },
@@ -28,8 +28,8 @@ function reelStyle(track) {
     sp,
     space,
     blobs: st0.blobs.map(([col, x, y, rad, op], i) => [R.mixHex(col, space.blobs[i], sp), x, y * (RH / 1350), rad * 1.2, op * (1 - 0.25 * sp)]),
-    labelTop: sp >= 0.5 ? '#fff' : st0.labelTop || '#fff',
-    labelLayers: sp >= 0.5 ? [st0.shadow, '#4b1590'] : st0.labelLayers || [st0.shadow, '#4b1590'],
+    labelTop: '#fff',
+    labelLayers: [st0.shadow, '#4b1590'],
   };
 }
 
@@ -37,10 +37,18 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
   R.resetGlow();
   const st = reelStyle(track);
   const { sp, space } = st;
-  const shift = 4 * slow(p, 1, 0);
-  const [s0, s1] = st.stops;
-  const top = R.mixHex(R.hsl(s0[0] + shift, s0[1], s0[2]), space.stops[0], sp);
-  const bottom = R.mixHex(R.hsl(s1[0] + shift, s1[1], s1[2]), space.stops[1], sp);
+  // Same colour drift as the grid covers (dawn pink -> night violet, then into space),
+  // so the Reels continue the feed; the playlist only shows in the label and accents.
+  const c0 = R.driftColors(track.day, p);
+  const top = R.mixHex(c0.top, '#1b1650', sp);
+  const bottom = R.mixHex(c0.bottom, '#060518', sp);
+  const orbitGlow = (x, y, rad, ph) => [x + rad * slow(p, 2, ph), y + rad * slow(p, 2, ph + 0.25)];
+  const [g1x, g1y] = orbitGlow(160, 1600, 70, 0);
+  const [g2x, g2y] = orbitGlow(960, 300, 60, 0.4);
+  const [g3x, g3y] = orbitGlow(820, 1100, 80, 0.7);
+  const glows = glow(R.mixHex('#8ff0ff', '#3f8cff', sp), g1x, g1y, 640, 0.55 - 0.15 * sp)
+    + glow(R.mixHex('#ff8ad8', '#a24cff', sp), g2x, g2y, 560, 0.6 - 0.12 * sp)
+    + glow(R.mixHex('#ffd6aa', '#ff5fb8', sp), g3x, g3y, 440, Math.max(0.08, 0.38 - c0.t * 0.28) * (1 - sp) + 0.28 * sp);
 
   const art = R.floating(scene.art, p, { art: true });
   const AR = scene.art.r;
@@ -88,11 +96,11 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${RW}" height="${RH}" viewBox="0 0 ${RW} ${RH}">
   <defs>${DEFS}
-    <linearGradient id="reelBg" x1="0" y1="0" x2="${st.vertical ? 0 : 1}" y2="1"><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient>
+    <linearGradient id="reelBg" x1="${(0.3 + 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y1="0" x2="${(0.7 - 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y2="1"><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient>
     <clipPath id="artClip"><circle cx="${art.x.toFixed(1)}" cy="${art.y.toFixed(1)}" r="${inner.toFixed(1)}"/></clipPath>
   </defs>
   <rect width="${RW}" height="${RH}" fill="url(#reelBg)"/>
-  ${st.blobs.map(([col, x, y, rad, op], i) => glow(col, x + 60 * slow(p, 2, i * 0.37), y + 60 * slow(p, 2, i * 0.37 + 0.25), rad, op)).join('')}
+  ${glows}
   ${R.stars((track.day || 0) * 7 + 3, p, sp, 90, RW, RH)}
   ${R.planet(880, 1650, 40, sp)}
   ${R.risers((track.day || 0) * 13 + 5, p, 6, RW, RH)}
@@ -107,12 +115,12 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
   ${R.twinkle(SPARK, 860, 1250, 76, '#fff6b0', p, scene.ph + 0.3)}
   ${R.twinkle(SPARK, 940, 470, 40, '#ffffff', p, scene.ph + 0.6)}
 
-  <rect x="64" y="214" width="300" height="84" rx="42" fill="#ff7fc8"/>
-  <rect x="64" y="200" width="300" height="84" rx="42" fill="#ffffff" opacity="0.92"/>
-  <text x="214" y="258" text-anchor="middle" font-family="Bagel Fat One" font-size="44" fill="#5a1a9c">bubble fm</text>
-  <rect x="${RW - 64 - 230}" y="200" width="230" height="84" rx="42" fill="#ffffff" opacity="0.92"/>
-  <text x="${RW - 64 - 115}" y="256" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="40" fill="#5a1a9c">day ${dayStr}</text>
-  ${stickerText(st.label, 64, 440, 112, { top: st.labelTop, layers: st.labelLayers, step: 7 })}
+  <rect x="64" y="294" width="300" height="84" rx="42" fill="#ff7fc8"/>
+  <rect x="64" y="280" width="300" height="84" rx="42" fill="#ffffff" opacity="0.92"/>
+  <text x="214" y="338" text-anchor="middle" font-family="Bagel Fat One" font-size="44" fill="#5a1a9c">bubble fm</text>
+  <rect x="${RW - 64 - 230}" y="280" width="230" height="84" rx="42" fill="#ffffff" opacity="0.92"/>
+  <text x="${RW - 64 - 115}" y="336" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="40" fill="#5a1a9c">day ${dayStr}</text>
+  ${stickerText(st.label, 64, 500, 104, { top: st.labelTop, layers: st.labelLayers, step: 7 })}
 
   <rect x="64" y="1288" width="${RW - 128}" height="240" rx="52" fill="${st.shadow}"/>
   <rect x="64" y="1270" width="${RW - 128}" height="240" rx="52" fill="#ffffff" opacity="0.95"/>

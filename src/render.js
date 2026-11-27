@@ -431,5 +431,5 @@ async function renderPost(day, tracks, { animate = true } = {}) {
 module.exports = {
   // Shared with the Reel renderer.
   PLAYLIST_STYLE, SPACE_STYLE, TAU, K, esc, rng, wave, slow, bob, shadow, floating, risers, twinkle, fit, hsl,
-  spaceMix, mixHex, stars, planet, toJpeg, toVideo, resetGlow: () => { glowId = 0; },
+  spaceMix, mixHex, driftColors, stars, planet, toJpeg, toVideo, resetGlow: () => { glowId = 0; },
   renderPost, coverSvg, trackSvg, W, H, DEFS, HEART, SPARK, bubble, stickerText, icon, glow, FONTS };
