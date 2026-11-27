@@ -251,8 +251,26 @@ async function refresh() {
   console.log(`Got a fresh Instagram token, valid for ${Math.round(secs / 86400)} days.`);
 }
 
+// Lists what Instagram's licensed music search finds, to check a song before posting.
+async function audio() {
+  const queries = process.argv.slice(3).join(' ').split('|').map((q) => q.trim()).filter(Boolean);
+  for (const query of queries.length ? queries : ['']) {
+    try {
+      const found = await instagram.searchAudio({
+        userId: process.env.IG_USER_ID || '17841460524384737',
+        token: env('IG_ACCESS_TOKEN'),
+        query,
+      });
+      console.log(`\n"${query || '(trending)'}": ${found.length} result(s)`);
+      for (const a of found.slice(0, 8)) console.log(`  ${a.artist} – ${a.title}  [${a.id}, ${Math.round((a.ms || 0) / 1000)}s, ${a.type}]`);
+    } catch (err) {
+      console.log(`\n"${query}": ${err.message}`);
+    }
+  }
+}
+
 const cmd = process.argv[2];
-const run = { prepare, publish, refresh }[cmd];
+const run = { prepare, publish, refresh, audio }[cmd];
 if (!run) {
   console.error('Usage: node src/index.js prepare|publish|refresh');
   process.exit(1);

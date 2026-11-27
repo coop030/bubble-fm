@@ -84,4 +84,18 @@ async function refreshToken(token) {
   return body;
 }
 
-module.exports = { publishCarousel, refreshToken };
+// Licensed music Instagram allows third-party apps to attach to Reels (Instagram Audio API).
+async function searchAudio({ userId, token, query, type = 'music' }) {
+  const params = { audio_type: type, user_id: userId, access_token: token };
+  if (query) params.search_query = query;
+  const body = await call('GET', 'ig_audio', params);
+  return (body.audio || body.data || []).map((a) => ({
+    id: a.audio_id || a.id,
+    title: a.title,
+    artist: a.display_artist,
+    ms: a.duration_in_ms,
+    type: a.audio_type,
+  }));
+}
+
+module.exports = { searchAudio, publishCarousel, refreshToken };
