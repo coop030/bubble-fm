@@ -1,0 +1,95 @@
+{
+  "breakfast": [
+    {
+      "artist": "Five and Tens",
+      "title": "Life Happens to Us All",
+      "handlesMissing": []
+    },
+    {
+      "artist": "Löwenzahnhonig, Long Tall Jefferson, Fai Baba, Paul Märki",
+      "title": "Löwenzahn",
+      "handlesMissing": [
+        "Löwenzahnhonig",
+        "Long Tall Jefferson",
+        "Fai Baba",
+        "Paul Märki"
+      ]
+    },
+    {
+      "artist": "Kinobe, Stephen Hague",
+      "title": "Slip Into Something More Comfortable - Stephen Hague 2016 Mix",
+      "handlesMissing": [
+        "Kinobe",
+        "Stephen Hague"
+      ]
+    },
+    {
+      "artist": "Jon Kennedy",
+      "title": "Surrenderism",
+      "handlesMissing": [
+        "Jon Kennedy"
+      ]
+    },
+    {
+      "artist": "Papa Romeo",
+      "title": "For Karl",
+      "handlesMissing": [
+        "Papa Romeo"
+      ]
+    }
+  ],
+  "datenight": [
+    {
+      "artist": "Cara Rose",
+      "title": "Romanticising",
+      "handlesMissing": [
+        "Cara Rose"
+      ]
+    },
+    {
+      "artist": "Skinshape",
+      "title": "I Didn't Know",
+      "handlesMissing": [
+        "Skinshape"
+      ]
+    },
+    {
+      "artist": "Ofege",
+      "title": "It's Not Easy",
+      "handlesMissing": [
+        "Ofege"
+      ]
+    },
+    {
+      "artist": "Lee Fields & The Expressions",
+      "title": "Never Be Another You",
+      "handlesMissing": [
+        "Lee Fields & The Expressions"
+      ]
+    },
+    {
+      "artist": "George McCrae",
+      "title": "You Can Have It All",
+      "handlesMissing": [
+        "George McCrae"
+      ]
+    }
+  ],
+  "boogie": [
+    {
+      "artist": "Akabu, Jimpster",
+      "title": "Searchin - Jimpster Mix",
+      "handlesMissing": [
+        "Akabu",
+        "Jimpster"
+      ]
+    },
+    {
+      "artist": "Silat Beksi",
+      "title": "Steezy",
+      "handlesMissing": [
+        "Silat Beksi"
+      ]
+    }
+  ]
+}

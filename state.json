@@ -1,5 +1,5 @@
 {
-  "day": 12,
+  "day": 13,
   "posted": {
     "breakfast": [
       "3KEXmUk5H8I1gkBUT6SUFn",
@@ -13,7 +13,8 @@
       "64A1s4UbNdMlYSeyKnx8x9",
       "50tmrlcBfHrPp2ogy182wI",
       "2GEsMmaLMqIA0trCyrAeoa",
-      "6otzvpeIBUBy3WkUQDFkwO"
+      "6otzvpeIBUBy3WkUQDFkwO",
+      "6DMUmD9dg6H3ODpDmuezrK"
     ],
     "boogie": [
       "1tL7TiCia7icnjGOCjdL5x",
@@ -27,7 +28,8 @@
       "7nnE9yOGuPhPtFMnhm6gRu",
       "41LflMrHRumXjTMgmT8ATy",
       "0vuQbxuPIXmabBeDCiMHDQ",
-      "5Nsfmt2BxPow9cOHumWOy6"
+      "5Nsfmt2BxPow9cOHumWOy6",
+      "6qD9C95xb6YFwfrm5o0NqO"
     ],
     "datenight": [
       "3HNp9HQ33wdDhAvEc4arE8",
@@ -41,7 +43,8 @@
       "0PYC777EjWywXUnojj0SEB",
       "0mIpT5VijWPv4b9s0K76qA",
       "6dwMebV6lVtwFiecdb8aSD",
-      "4KttPrziB8X5vtOr6rb3MK"
+      "4KttPrziB8X5vtOr6rb3MK",
+      "6KNV6L3b7beomEUnzWgw0X"
     ]
   },
   "postedKeys": [
@@ -80,7 +83,10 @@
     "loyoto|karmadog",
     "astrocolor|cosmosis",
     "mei anima|highway",
-    "frank|companion"
+    "frank|companion",
+    "jake xerxes fussell|16 20",
+    "durand jones|ride or die",
+    "mood ii swing|sunlight in my eyes"
   ],
   "history": [
     {
@@ -201,6 +207,16 @@
         "Astrocolor – Cosmosis",
         "mei anima – Highway",
         "Frank & Tony, DJ Sprinkles – Companion"
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "day": 13,
+      "instagramId": "17905459089674787",
+      "tracks": [
+        "Jake Xerxes Fussell – 16–20",
+        "Durand Jones & The Indications, Aaron Frazer – Ride or Die",
+        "Mood II Swing – Sunlight In My Eyes"
       ]
     }
   ]
