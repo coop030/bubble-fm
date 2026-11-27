@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-27",
+  "day": 13,
+  "published": false,
+  "tracks": [
+    {
+      "id": "6DMUmD9dg6H3ODpDmuezrK",
+      "title": "16–20",
+      "artist": "Jake Xerxes Fussell",
+      "url": "https://open.spotify.com/track/6DMUmD9dg6H3ODpDmuezrK",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b2730e4f5151800944e848eba547",
+      "playlist": "breakfast",
+      "instagram": []
+    },
+    {
+      "id": "6KNV6L3b7beomEUnzWgw0X",
+      "title": "Ride or Die",
+      "artist": "Durand Jones & The Indications, Aaron Frazer",
+      "url": "https://open.spotify.com/track/6KNV6L3b7beomEUnzWgw0X",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d0000b273de6c8eddb5cada637afaa082",
+      "playlist": "datenight",
+      "instagram": [
+        "durandjonesandtheindications",
+        "aaron_frazer"
+      ]
+    },
+    {
+      "id": "6qD9C95xb6YFwfrm5o0NqO",
+      "title": "Sunlight In My Eyes",
+      "artist": "Mood II Swing",
+      "url": "https://open.spotify.com/track/6qD9C95xb6YFwfrm5o0NqO",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273de048f7cb6450e432b8c4e4a",
+      "playlist": "boogie",
+      "instagram": []
+    }
+  ],
+  "files": [
+    "1.mp4",
+    "2.mp4",
+    "3.mp4",
+    "4.mp4"
+  ]
+}
