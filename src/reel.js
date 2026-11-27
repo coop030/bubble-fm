@@ -40,13 +40,18 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
   // Same colour drift as the grid covers (dawn pink -> night violet, then into space),
   // so the Reels continue the feed; the playlist only shows in the label and accents.
   const c0 = R.driftColors(track.day, p);
-  const top = R.mixHex(c0.top, '#1b1650', sp);
-  const bottom = R.mixHex(c0.bottom, '#060518', sp);
+  const gridBg = (process.env.REEL_BG || 'playlist') === 'grid';
+  const shift = 4 * slow(p, 1, 0);
+  const [s0, s1] = st.stops;
+  const top = gridBg ? R.mixHex(c0.top, '#1b1650', sp) : R.mixHex(R.hsl(s0[0] + shift, s0[1], s0[2]), space.stops[0], sp);
+  const bottom = gridBg ? R.mixHex(c0.bottom, '#060518', sp) : R.mixHex(R.hsl(s1[0] + shift, s1[1], s1[2]), space.stops[1], sp);
   const orbitGlow = (x, y, rad, ph) => [x + rad * slow(p, 2, ph), y + rad * slow(p, 2, ph + 0.25)];
   const [g1x, g1y] = orbitGlow(160, 1600, 70, 0);
   const [g2x, g2y] = orbitGlow(960, 300, 60, 0.4);
   const [g3x, g3y] = orbitGlow(820, 1100, 80, 0.7);
-  const glows = glow(R.mixHex('#8ff0ff', '#3f8cff', sp), g1x, g1y, 640, 0.55 - 0.15 * sp)
+  const glows = !gridBg
+    ? st.blobs.map(([col, x, y, rad, op], i) => glow(col, x + 60 * slow(p, 2, i * 0.37), y + 60 * slow(p, 2, i * 0.37 + 0.25), rad, op)).join('')
+    : glow(R.mixHex('#8ff0ff', '#3f8cff', sp), g1x, g1y, 640, 0.55 - 0.15 * sp)
     + glow(R.mixHex('#ff8ad8', '#a24cff', sp), g2x, g2y, 560, 0.6 - 0.12 * sp)
     + glow(R.mixHex('#ffd6aa', '#ff5fb8', sp), g3x, g3y, 440, Math.max(0.08, 0.38 - c0.t * 0.28) * (1 - sp) + 0.28 * sp);
 
@@ -96,7 +101,7 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${RW}" height="${RH}" viewBox="0 0 ${RW} ${RH}">
   <defs>${DEFS}
-    <linearGradient id="reelBg" x1="${(0.3 + 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y1="0" x2="${(0.7 - 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y2="1"><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient>
+    <linearGradient id="reelBg" ${!gridBg ? `x1="0" y1="0" x2="${st.vertical ? 0 : 1}" y2="1"` : `x1="${(0.3 + 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y1="0" x2="${(0.7 - 0.05 * slow(p, 1, 0.1)).toFixed(3)}" y2="1"`}><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient>
     <clipPath id="artClip"><circle cx="${art.x.toFixed(1)}" cy="${art.y.toFixed(1)}" r="${inner.toFixed(1)}"/></clipPath>
   </defs>
   <rect width="${RW}" height="${RH}" fill="url(#reelBg)"/>
@@ -132,12 +137,29 @@ function reelSvg(track, p = 0, scene = reelScene(track)) {
 </svg>`;
 }
 
-// Returns { still, video } for the day's track.
+// Reel cover for the profile grid: the same day cover as before, so the grid carries on.
+// The grid shows the middle 3:4 (1080x1440 from y 240); the cover fills that, the rest continues its gradient.
+function gridCoverSvg(day) {
+  const inner = R.coverSvg(day, 0).replace('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">',
+    '<svg x="-36" y="240" width="1152" height="1440" viewBox="0 0 1080 1350" preserveAspectRatio="none" overflow="visible">')
+    // Stretch the cover's own background over the whole 9:16 so there is no seam above and below.
+    .replace('<rect width="1080" height="1350" fill="url(#bg)"/>', '<rect x="-40" y="-230" width="1160" height="1810" fill="url(#bg)"/>');
+  const c0 = R.driftColors(day, 0);
+  const sp = R.spaceMix(day);
+  const top = R.mixHex(c0.top, '#1b1650', sp);
+  const bottom = R.mixHex(c0.bottom, '#060518', sp);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${RW}" height="${RH}" viewBox="0 0 ${RW} ${RH}">
+  <rect width="${RW}" height="241" fill="${top}"/><rect y="1679" width="${RW}" height="241" fill="${bottom}"/>
+  ${inner}
+</svg>`;
+}
+
+// Returns { still (grid cover), frame (first video frame), video } for the day's track.
 async function renderReel(track, { animate = true } = {}) {
   const scene = reelScene(track);
-  const still = await R.toJpeg(reelSvg(track, 0, scene), RW);
+  const still = await R.toJpeg(gridCoverSvg(track.day), RW);
   const video = animate ? await R.toVideo((p) => reelSvg(track, p, scene), RW, RH) : null;
   return { still, video };
 }
 
-module.exports = { renderReel, reelSvg, RW, RH };
+module.exports = { renderReel, reelSvg, gridCoverSvg, RW, RH };

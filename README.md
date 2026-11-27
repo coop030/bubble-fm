@@ -89,6 +89,7 @@ The link-in-bio page lives in `docs/` and is published at **https://coop030.gith
 
 Every day one track goes out as a 15-second Reel (1080×1920), taking the playlists in turn: breakfast → date night → boogie. If a playlist has run dry, it moves on to the next one that still has songs.
 
+- Grid cover (cover_url): the familiar day cover (day number, bubbles, colour drift), sized so the 3:4 grid crop matches the old posts. The video itself uses the playlist colours; set `REEL_BG=grid` to use the grid colours in the video too.
 - The cover art spins inside a big bubble like a record; small bubbles orbit it, and a bubble equalizer and progress dots move in the track card. Text stays clear of Instagram's Reel buttons.
 - Caption: `day 0NN | playlist`, then `Artist – Title`, the link-in-bio line and the hashtags. Artists in artists.json are tagged.
 - Music: Instagram's API only offers its royalty-free library to this account (searching for the real songs returns unrelated tracks). The workflow has an optional `audio_id` input for a track from that library; without it the Reel goes out with silent sound, and the song can be added by hand in the app.
